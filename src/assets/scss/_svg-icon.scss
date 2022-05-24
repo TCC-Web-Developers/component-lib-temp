@@ -1,0 +1,12 @@
+$svg-sizes: (
+  sm: 23px,
+  md: 26px,
+  lg: 29px,
+);
+
+@each $key, $val in $svg-sizes {
+  .svg-icon-#{$key} {
+    height: #{$val};
+    width: #{$val};
+  }
+}
