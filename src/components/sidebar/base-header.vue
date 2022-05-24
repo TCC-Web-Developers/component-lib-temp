@@ -11,6 +11,7 @@
 
 <style lang="scss" scoped>
 .header {
+  flex: none;
   height: 72px;
   background-color: salmon;
 }

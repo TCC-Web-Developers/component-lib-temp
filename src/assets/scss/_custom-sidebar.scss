@@ -6,11 +6,11 @@ $padding-x: 25px;
   padding: 0 $padding-x;
 }
 
-
 //=== COLORS ===========================
 $bg-color-top: #ffc674;
 $bg-color-bottom: #f7ae46;
 
+//=== UTILITIES ===========================
 $utilities: (
   "gradient": (
     property: background,
