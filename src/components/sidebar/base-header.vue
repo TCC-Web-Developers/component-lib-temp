@@ -6,7 +6,7 @@ const props = defineProps({
 
 <template>
   <div
-    class="sidebar-header d-flex align-items-center px-menu-item"
+    class="sidebar-header d-flex align-items-center"
     :class="[`justify-content-${isSidebarOpen ? 'between' : 'center'}`]"
   >
     <slot name="header-logo"></slot>

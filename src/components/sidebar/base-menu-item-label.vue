@@ -1,7 +1,13 @@
-<script setup></script>
+<script setup>
+import { useSidebarStore } from "@/stores/sidebar.js";
+const sidebar = useSidebarStore();
+</script>
 
 <template>
-  <span class="d-flex align-items-center font-poppins menu-item-label">
+  <span
+    v-if="sidebar.isOpen"
+    class="d-flex align-items-center font-poppins menu-item-label"
+  >
     <slot></slot>
   </span>
 </template>

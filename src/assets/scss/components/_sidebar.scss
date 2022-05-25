@@ -1,5 +1,4 @@
-$open-sidebar-width: 265px;
-$close-sidebar-width: 70px;
+@import "../custom-variables.scss";
 
 $sidebar-states: (
   open: $open-sidebar-width,
@@ -14,6 +13,24 @@ $sidebar-states: (
     bottom: 0;
     z-index: 100;
     width: $width;
-    transition: 0.2s width linear;
+    background: transparent
+      linear-gradient(180deg, $bg-color-top 0%, $bg-color-bottom 100%)
+      0%
+      0%
+      no-repeat
+      padding-box;
+    transition: $transition;
   }
 }
+
+$utilities: (
+  "gradient": (
+    property: background,
+    class: bg,
+    values: (
+      gradient: transparent
+        linear-gradient(180deg, $bg-color-top 0%, $bg-color-bottom 100%) 0% 0%
+        no-repeat padding-box,
+    ),
+  ),
+);

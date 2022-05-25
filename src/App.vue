@@ -2,14 +2,23 @@
 // import { RouterLink, RouterView } from "vue-router";
 // import IconPlaceholder from "@/components/IconPlaceholder.vue";
 import SidebarComponent from "@/components/organisms/sidebar-component.vue";
+
+import { useSidebarStore } from "@/stores/sidebar.js";
+const sidebar = useSidebarStore();
 </script>
 
 <template>
   <main class="d-none d-lg-block">
     <div class="page d-flex flex-row">
       <SidebarComponent />
-      <div class="wrapper">
-        <header></header>
+      <div
+        class="wrapper"
+        :class="[`wrapper-sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+      >
+        <header
+          class="navbar"
+          :class="[`navbar-sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+        ></header>
         <div class="content"></div>
       </div>
     </div>
@@ -19,35 +28,7 @@ import SidebarComponent from "@/components/organisms/sidebar-component.vue";
 
 <style lang="scss">
 @import "@/assets/scss/custom.scss";
-
-main {
-  // background-color: salmon;
-  // height: 100vh;
-  // width: 100%;
-
-  .page {
-    .wrapper {
-      min-height: 100vh;
-      width: 100%;
-      background-color: rgb(255, 233, 236);
-      padding: 72px 0 0 265px;
-
-      header {
-        position: fixed;
-        top: 0;
-        right: 0;
-        left: 265px;
-        z-index: 99;
-        height: 72px;
-        background-color: rgb(236, 236, 236);
-      }
-
-      .content {
-        height: 200vh;
-        width: 100%;
-        background-color: rgb(125, 125, 125);
-      }
-    }
-  }
-}
+@import "@/assets/scss/navbar.scss";
+@import "@/assets/scss/content.scss";
+@import "@/assets/scss/navbar-and-content-wrapper.scss";
 </style>

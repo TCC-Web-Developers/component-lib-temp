@@ -4,11 +4,11 @@ const sidebar = useSidebarStore();
 </script>
 
 <template>
-  <div v-show="sidebar.isOpen" class="menu-section-label">
-    <slot></slot>
-  </div>
+  <span v-show="!sidebar.isOpen" class="menu-section-icon">
+    <i class="bi bi-three-dots"></i>
+  </span>
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/menu-item.scss";
+@import "@/assets/scss/components/menu-section.scss";
 </style>

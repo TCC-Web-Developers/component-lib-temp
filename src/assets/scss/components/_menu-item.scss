@@ -4,7 +4,7 @@ $base-opacity: 90%;
 
 // Menu Item Spacing
 $padding-x: 25px;
-$padding-y: 10px;
+$padding-y: 9px;
 
 // Font
 $font-size: 14px;
@@ -42,13 +42,6 @@ $font-family: "Poppins", sans-serif;
   font-size: 0.6rem;
   opacity: $base-opacity;
   flex: 0 0 20px;
-}
-
-// Menu Section Label Wrapper
-.menu-section-label-wrapper {
-  margin: 20px 0 0 0;
-  height: 40px;
-  padding: 0 25px;
 }
 
 // Menu Item Link

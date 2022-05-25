@@ -1,11 +1,13 @@
 <script setup>
+import { useSidebarStore } from "@/stores/sidebar.js";
+const sidebar = useSidebarStore();
 const props = defineProps({
   isShow: Boolean,
 });
 </script>
 
 <template>
-  <span v-show="isShow">
+  <span v-show="isShow ? sidebar.isOpen : false">
     <i
       class="bi bi-chevron-right d-flex justify-content-end menu-item-arrow"
     ></i>

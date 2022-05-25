@@ -1,0 +1,17 @@
+@import "./custom-variables.scss";
+
+.wrapper {
+  min-height: 100vh;
+  width: 100%;
+  background-color: rgb(255, 233, 236);
+  transition: $transition;
+}
+
+.wrapper-sidebar-open {
+  padding: $navbar-height 0 0 $open-sidebar-width;
+}
+
+.wrapper-sidebar-close {
+  padding: $navbar-height 0 0
+    calc($open-sidebar-width + ($close-sidebar-width - $open-sidebar-width));
+}

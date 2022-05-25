@@ -1,0 +1,21 @@
+@import "./custom-variables.scss";
+
+.navbar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: $open-sidebar-width;
+  z-index: 99;
+  height: $navbar-height;
+  background-color: rgb(236, 236, 236);
+}
+
+.navbar-sidebar-open {
+  left: $open-sidebar-width;
+}
+
+.navbar-sidebar-close {
+  left: calc(
+    $open-sidebar-width + ($close-sidebar-width - $open-sidebar-width)
+  );
+}

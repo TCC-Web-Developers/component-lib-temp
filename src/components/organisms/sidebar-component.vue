@@ -7,6 +7,7 @@ import MenuItemSidebar from "@/components/molecules/menu-item-sidebar.vue";
 import BaseMenuSection from "@/components/sidebar/base-menu-section.vue";
 import BaseMenuSectionLabel from "@/components/sidebar/base-menu-section-label.vue";
 import BaseMenu from "@/components/sidebar/base-menu.vue";
+import BaseMenuSectionIcon from "@/components/sidebar/base-menu-section-icon.vue";
 //STATES
 import { useSidebarStore } from "@/stores/sidebar.js";
 
@@ -15,13 +16,16 @@ const sidebar = useSidebarStore();
 
 <template>
   <div
-    class="bg-gradient d-flex flex-column flex-row-auto"
+    class="d-flex flex-column flex-row-auto"
     :class="[`sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
   >
     <HeaderSidebar />
     <BaseMenu>
       <MenuItemSidebar :href="'/'" :isShow="false" />
       <BaseMenuSection>
+        <template #menu-section-icon>
+          <BaseMenuSectionIcon />
+        </template>
         <template #menu-section-label>
           <BaseMenuSectionLabel>Custom</BaseMenuSectionLabel>
         </template>
