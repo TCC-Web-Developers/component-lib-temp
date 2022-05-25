@@ -1,0 +1,38 @@
+$sidebar-menu-margin-y: 13px;
+$header-height: 72px;
+//for responsive pixeled height
+$sidebar-menu-height:  calc(100vh - $header-height - ($sidebar-menu-margin-y * 2));
+
+.sidebar-menu-wrapper {
+  flex: 1 0 auto;
+
+  .sidebar-menu {
+    height: $sidebar-menu-height;
+    width: 100%;
+    overflow-y: auto;
+    margin: $sidebar-menu-margin-y 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+      position: absolute;
+      width: 0.3rem;
+    }
+
+    // &::-webkit-scrollbar-track {
+    //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    // }
+
+    // &::-webkit-scrollbar-thumb {
+    //   border-radius: 100px;
+    //   background-color: darkgrey;
+    //   outline: 1px solid slategrey;
+    // }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      padding: 15px 0;
+    }
+  }
+}

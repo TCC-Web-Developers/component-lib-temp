@@ -1,0 +1,23 @@
+$height: 72px;
+
+// Header
+.sidebar-header {
+  flex: none;
+  height: $height;
+  background-color: salmon;
+}
+
+// Menu Btn
+.menu-btn {
+  outline: none;
+  border: none;
+  background-color: transparent;
+
+  &.menu-btn-open {
+    transform: rotateY(0deg);
+  }
+
+  &.menu-btn-close {
+    transform: rotate(180deg);
+  }
+}

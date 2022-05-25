@@ -4,14 +4,20 @@ import Logo from "@/assets/logo.svg";
 import BaseHeader from "@/components/sidebar/base-header.vue";
 import BaseMenuBtn from "@/components/sidebar/base-menu-btn.vue";
 import BaseLogo from "@/components/sidebar/base-logo.vue";
+//STATE
+import { useSidebarStore } from "@/stores/sidebar.js";
+
+const sidebar = useSidebarStore();
 </script>
 
 <template>
-  <BaseHeader>
+  <BaseHeader :isSidebarOpen="sidebar.isOpen">
     <template #header-logo>
-      <BaseLogo :href="'/'">
-        <img :src="Logo" />
-      </BaseLogo>
+      <span v-show="sidebar.isOpen">
+        <BaseLogo :href="'/'">
+          <img :src="Logo" />
+        </BaseLogo>
+      </span>
     </template>
     <template #header-menu-btn>
       <BaseMenuBtn />

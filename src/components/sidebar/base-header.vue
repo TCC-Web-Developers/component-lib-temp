@@ -1,8 +1,13 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  isSidebarOpen: Boolean,
+});
+</script>
 
 <template>
   <div
-    class="header d-flex align-items-center justify-content-between px-menu-item"
+    class="sidebar-header d-flex align-items-center px-menu-item"
+    :class="[`justify-content-${isSidebarOpen ? 'between' : 'center'}`]"
   >
     <slot name="header-logo"></slot>
     <slot name="header-menu-btn"></slot>
@@ -10,9 +15,5 @@
 </template>
 
 <style lang="scss" scoped>
-.header {
-  flex: none;
-  height: 72px;
-  background-color: salmon;
-}
+@import "@/assets/scss/components/sidebar-header.scss";
 </style>

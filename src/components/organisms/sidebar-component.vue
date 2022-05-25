@@ -1,63 +1,43 @@
 <script setup>
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
+//COMPONENTS
 import HeaderSidebar from "@/components/molecules/header-sidebar.vue";
 import MenuItemSidebar from "@/components/molecules/menu-item-sidebar.vue";
+import BaseMenuSection from "@/components/sidebar/base-menu-section.vue";
+import BaseMenuSectionLabel from "@/components/sidebar/base-menu-section-label.vue";
+import BaseMenu from "@/components/sidebar/base-menu.vue";
+//STATES
+import { useSidebarStore } from "@/stores/sidebar.js";
+
+const sidebar = useSidebarStore();
 </script>
 
 <template>
-  <div class="sidebar bg-gradient d-flex flex-column flex-row-auto">
+  <div
+    class="bg-gradient d-flex flex-column flex-row-auto"
+    :class="[`sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+  >
     <HeaderSidebar />
-    <div class="sidebar-menu-wrapper">
-      <div class="sidebar-menu">
-        <ul>
-          <MenuItemSidebar />
-        </ul>
-      </div>
-    </div>
+    <BaseMenu>
+      <MenuItemSidebar :href="'/'" :isShow="false" />
+      <BaseMenuSection>
+        <template #menu-section-label>
+          <BaseMenuSectionLabel>Custom</BaseMenuSectionLabel>
+        </template>
+        <template #menu-items>
+          <MenuItemSidebar :href="'#collapseOne'" :isShow="true" />
+          <div id="collapseOne" class="collapse" data-bs-parent="#accordion">
+            <MenuItemSidebar :isShow="true" />
+            <MenuItemSidebar :isShow="true" />
+            <MenuItemSidebar :isShow="true" />
+          </div>
+        </template>
+      </BaseMenuSection>
+    </BaseMenu>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  width: 265px;
-  z-index: 100;
-
-  .sidebar-menu-wrapper {
-    flex: 1 0 auto;
-
-    .sidebar-menu {
-      height: calc(100vh - 72px - 13px - 13px);
-      width: 100%;
-      overflow-y: auto;
-      margin: 13px 0;
-
-      &::-webkit-scrollbar {
-        display: none;
-        position: absolute;
-        width: 0.3rem;
-      }
-
-      // &::-webkit-scrollbar-track {
-      //   box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-      // }
-
-      // &::-webkit-scrollbar-thumb {
-      //   border-radius: 100px;
-      //   background-color: darkgrey;
-      //   outline: 1px solid slategrey;
-      // }
-
-      ul {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        height: 1000px;
-        padding: 15px 0;
-      }
-    }
-  }
-}
+@import "@/assets/scss/components/sidebar.scss";
 </style>

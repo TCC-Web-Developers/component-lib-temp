@@ -1,35 +1,58 @@
-//SPACES
-$padding-x: 25px;
-$padding-y: 9px;
+// Base Color
+$base-color: #ffffff;
+$base-opacity: 90%;
 
-//FONT
+// Menu Item Spacing
+$padding-x: 25px;
+$padding-y: 10px;
+
+// Font
 $font-size: 14px;
 $font-weight: 500;
-$font-color: white;
 $font-family: "Poppins", sans-serif;
 
-$opacity: 90%;
-
+// Icon
 .menu-item-icon {
   flex: 0 0 35px;
-  opacity: $opacity;
+  opacity: $base-opacity;
 }
 
+// Labels
 .menu-item-label {
   font-size: $font-size;
   font-weight: $font-weight;
-  color: $font-color;
+  color: $base-color;
   font-family: $font-family;
-  opacity: $opacity;
+  opacity: $base-opacity;
+  flex-grow: 1;
 }
 
+.menu-section-label {
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  color: $base-color;
+  opacity: $base-opacity;
+}
+
+// Arrow Icon
 .menu-item-arrow {
-  color: $font-color;
+  color: $base-color;
   font-size: 0.6rem;
-  opacity: $opacity;
+  opacity: $base-opacity;
+  flex: 0 0 20px;
 }
 
-.menu-item {
+// Menu Section Label Wrapper
+.menu-section-label-wrapper {
+  margin: 20px 0 0 0;
+  height: 40px;
+  padding: 0 25px;
+}
+
+// Menu Item Link
+.menu-item-link {
   padding: $padding-y $padding-x;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);

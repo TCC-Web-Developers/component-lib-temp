@@ -1,9 +1,9 @@
 <script setup></script>
 
 <template>
-  <span class="d-flex align-items-center font-poppins menu-item-label">
+  <div class="menu-section-label">
     <slot></slot>
-  </span>
+  </div>
 </template>
 
 <style lang="scss" scoped>

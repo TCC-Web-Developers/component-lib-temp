@@ -1,0 +1,19 @@
+$open-sidebar-width: 265px;
+$close-sidebar-width: 70px;
+
+$sidebar-states: (
+  open: $open-sidebar-width,
+  close: $close-sidebar-width,
+);
+
+@each $key, $width in $sidebar-states {
+  .sidebar-#{$key} {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 100;
+    width: $width;
+    transition: 0.2s width linear;
+  }
+}
