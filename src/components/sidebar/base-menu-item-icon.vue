@@ -3,9 +3,7 @@ import BaseSvgIcon from "@/components/global/base-svg-icon.vue";
 </script>
 
 <template>
-  <BaseSvgIcon
-    class="d-flex align-items-center menu-item-icon justify-content-start"
-  >
+  <BaseSvgIcon class="d-flex align-items-center menu-item-icon">
     <slot></slot>
   </BaseSvgIcon>
 </template>

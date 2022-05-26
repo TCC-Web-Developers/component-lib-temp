@@ -4,18 +4,20 @@ import BaseLink from "@/components/global/base-link.vue";
 const props = defineProps({
   href: String,
   type: String,
+  itemLevel: String,
 });
 </script>
 
 <template>
-  <li class="menu-item">
+  <li class="menu-item-wrapper">
     <BaseLink
       :href="href"
-      class="d-flex align-items-center menu-item-link"
-      data-bs-toggle="collapse"
+      class="d-flex align-items-center"
+      :class="[`${type}`, `${itemLevel}-level-item`]"
     >
-      <slot></slot>
+      <slot name="menu-item"></slot>
     </BaseLink>
+    <slot name="submenu"></slot>
   </li>
 </template>
 
