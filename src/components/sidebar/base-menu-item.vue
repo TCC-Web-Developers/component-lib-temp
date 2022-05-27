@@ -6,11 +6,17 @@ const props = defineProps({
   type: String,
   itemLevel: String,
 });
+const emit = defineEmits(["handleToggleItem"]);
+
+const handleToggleItem = () => {
+  emit("handleToggleItem");
+};
 </script>
 
 <template>
   <li class="menu-item-wrapper">
     <BaseLink
+      @click="handleToggleItem"
       :href="href"
       class="d-flex align-items-center"
       :class="[`${type}`, `${itemLevel}-level-item`]"

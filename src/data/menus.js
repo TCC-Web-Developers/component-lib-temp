@@ -13,6 +13,7 @@ const menus = [
         isLink: false,
         url: "#",
         icon: "IconPlacholder",
+        areItemsShow: false,
         //submenu items
         items: [
           {
@@ -190,12 +191,13 @@ const menus = [
           },
           {
             id: 2,
-            type: "submenu-item",
+            type: "link-item",
             label: "inbox",
             isCollapsible: false,
             isLink: true,
             url: "/inbox",
             bulletType: "dash",
+            items: [],
           },
         ],
       },
@@ -207,6 +209,7 @@ const menus = [
         isLink: false,
         url: "#",
         icon: "IconPlacholder",
+        areItemsShow: false,
         //submenu items
         items: [
           {

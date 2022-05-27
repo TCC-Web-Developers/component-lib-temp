@@ -7,10 +7,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <span v-show="isShow ? sidebar.isOpen : false">
-    <i
-      class="bi bi-chevron-right d-flex justify-content-end menu-item-arrow"
-    ></i>
+  <span
+    v-show="isShow ? sidebar.isOpen : false"
+    class="menu-item-arrow d-flex justify-content-end"
+  >
+    <i class="bi bi-chevron-right"></i>
   </span>
 </template>
 
