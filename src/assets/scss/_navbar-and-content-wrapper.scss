@@ -5,13 +5,23 @@
   width: 100%;
   background-color: rgb(255, 233, 236);
   transition: $transition;
-}
 
-.wrapper-sidebar-open {
-  padding: $navbar-height 0 0 $open-sidebar-width;
-}
+  &.wrapper-sidebar-open {
+    padding: $navbar-height 0 0 $open-sidebar-width;
+    @media (max-width: 992px) {
+      padding: $navbar-height 0 0 0;
+    }
+  }
 
-.wrapper-sidebar-close {
-  padding: $navbar-height 0 0
-    calc($open-sidebar-width + ($close-sidebar-width - $open-sidebar-width));
+  &.wrapper-sidebar-close {
+    padding: $navbar-height 0 0
+      calc($open-sidebar-width + ($close-sidebar-width - $open-sidebar-width));
+    @media (max-width: 992px) {
+      padding: $navbar-height 0 0 0;
+    }
+  }
+
+  @media (max-width: 992px) {
+    padding: $navbar-height 0 0 0;
+  }
 }

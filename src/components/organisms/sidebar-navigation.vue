@@ -1,6 +1,4 @@
 <script setup>
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { ref } from "vue";
 //COMPONENTS
 import HeaderSidebar from "@/components/molecules/header-sidebar.vue";
@@ -13,17 +11,37 @@ import { useSidebarStore } from "@/stores/sidebar.js";
 //DATA
 import menusObject from "@/data/menus.js";
 
+const props = defineProps({
+  isOffCanvasOpen: Boolean,
+});
 const menus = ref(menusObject);
 const sidebar = useSidebarStore();
+
+const handleMouseEnter = () => {
+  if (!sidebar.isOpen) {
+    sidebar.mouseOverSidebar();
+  }
+};
+
+const handleMouseLeave = () => {
+  if (!sidebar.isOpen) {
+    sidebar.mouseLeaveSidebar();
+  }
+};
 </script>
 
 <template>
   <div
-    class="d-flex flex-column flex-row-auto"
-    :class="[`sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+    class="sidebar-mobile d-flex flex-column flex-row-auto"
+    :class="[
+      `sidebar-${
+        sidebar.isOpen ? 'open' : sidebar.isHovering ? 'hover' : 'close'
+      }`,
+      `${isOffCanvasOpen ? 'open-sidebar-mobile' : ''}`,
+    ]"
   >
     <HeaderSidebar />
-    <BaseMenu>
+    <BaseMenu @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
       <MenuItemSidebar
         :label="'Dashboard'"
         :type="'menu-item'"
@@ -101,10 +119,18 @@ const sidebar = useSidebarStore();
 <style lang="scss" scoped>
 @import "@/assets/scss/components/sidebar.scss";
 
-.collapsable-menu {
-  overflow: hidden;
-  transition: 0.2s max-height linear;
-  list-style: none;
-  padding: 0;
+.sidebar-mobile {
+  @media (max-width: 992px) {
+    z-index: 501;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-100%);
+    transition: 0.2s transform linear;
+
+    &.open-sidebar-mobile {
+      transform: translateX(0%);
+    }
+  }
 }
 </style>

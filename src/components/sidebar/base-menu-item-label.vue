@@ -5,7 +5,7 @@ const sidebar = useSidebarStore();
 
 <template>
   <span
-    v-if="sidebar.isOpen"
+    v-if="sidebar.isOpen || sidebar.isHovering"
     class="d-flex align-items-center font-poppins menu-item-label"
   >
     <slot></slot>

@@ -26,85 +26,106 @@ const getArrowIcon = submenu => {
   return submenu.previousElementSibling.children[2].children[0];
 };
 
+const getMaxHeight = value => {
+  return Number(value.style.maxHeight.replace("px", ""));
+};
+
 const handleToggleItem = () => {
   if (!props.isCollapsible) return;
 
-  const defaultArrowRotation = "rotate(0deg)";
-  const defaultSubmenuHeight = "0px";
-  const submenu = itemsRef.value;
-  const submenuStatus = submenu.dataset.status;
+  // const defaultArrowRotation = "rotate(0deg)";
+  // const defaultSubmenuHeight = "0px";
+  // const submenu = itemsRef.value;
+  // const submenuStatus = submenu.dataset.status;
 
-  const itemLevel = itemsRef.value.dataset.level;
-  const submenus = [...document.querySelectorAll(`[data-level=${itemLevel}]`)];
-  const activeSubmenus = [...document.querySelectorAll(`[data-status=show]`)];
-  const arrowIcon = getArrowIcon(submenu);
+  // const itemLevel = itemsRef.value.dataset.level;
+  // const submenus = [...document.querySelectorAll(`[data-level=${itemLevel}]`)];
+  // const activeSubmenus = [...document.querySelectorAll(`[data-status=show]`)];
+  // const arrowIcon = getArrowIcon(submenu);
 
-  const rootSubmenu = activeSubmenus.find(
-    submenu => submenu.dataset.level === "root"
-  );
-  const firstSubmenu = activeSubmenus.find(
-    submenu => submenu.dataset.level === "first"
-  );
-  const activeSubmenusTotalCurrentHeight = activeSubmenus.map(submenu =>
-    Number(submenu.style.maxHeight.replace("px", ""))
-  );
+  // const rootSubmenu = activeSubmenus.find(
+  //   submenu => submenu.dataset.level === "root"
+  // );
+  // const firstSubmenu = activeSubmenus.find(
+  //   submenu => submenu.dataset.level === "first"
+  // );
+  // const activeSubmenusTotalCurrentHeight = activeSubmenus.map(submenu =>
+  //   getMaxHeight(submenu)
+  // );
 
-  //hide item
-  if (submenuStatus === "show") {
-    itemsRef.value.style.maxHeight = defaultSubmenuHeight;
-    itemsRef.value.dataset.status = "hidden";
-    arrowIcon.style.transform = defaultArrowRotation;
+  // //hide item
+  // if (submenuStatus === "show") {
+  //   itemsRef.value.style.maxHeight = defaultSubmenuHeight;
+  //   itemsRef.value.dataset.status = "hidden";
+  //   arrowIcon.style.transform = defaultArrowRotation;
 
-    if (itemLevel === "first") {
-      rootSubmenu.style.maxHeight = `${
-        [...rootSubmenu.children].length * 40
-      }px`;
-    }
-    // else if (itemLevel === "second") {
-    //   rootSubmenu.style.maxHeight = `${
-    //     [...rootSubmenu.children].length * 40
-    //   }px`;
-    // }
-    return;
-  }
+  //   if (itemLevel === "root") {
+  //     if (firstSubmenu) {
+  //       console.log("root", "close");
+  //     }
+  //   } else if (itemLevel === "first") {
+  //     rootSubmenu.style.maxHeight = `${
+  //       [...rootSubmenu.children].length * 40
+  //     }px`;
+  //   } else if (itemLevel === "second") {
+  //     rootSubmenu.style.maxHeight = `${
+  //       [...rootSubmenu.children].length * 40 +
+  //       [...firstSubmenu.children].length * 40
+  //     }px`;
 
-  //show item while one item is currently open
-  submenus.map(items => {
-    const itemArrowElem = getArrowIcon(items);
-    items.style.maxHeight = defaultSubmenuHeight;
-    itemArrowElem.style.transform = defaultArrowRotation;
-  });
+  //     firstSubmenu.style.maxHeight = `${
+  //       [...firstSubmenu.children].length * 40
+  //     }px`;
+  //   }
+  //   return;
+  // }
 
-  //show item
-  itemsRef.value.style.maxHeight = `${40 * props.itemsLength}px`;
-  itemsRef.value.dataset.status = "show";
-  arrowIcon.style.transform = "rotate(90deg)";
-  //side effect
-  if (itemLevel === "first") {
-    rootSubmenu.style.maxHeight = `${
-      activeSubmenusTotalCurrentHeight[0] + 40 * props.itemsLength
-    }px`;
-  } else if (itemLevel === "second") {
-    console.log("second", activeSubmenusTotalCurrentHeight);
-    rootSubmenu.style.maxHeight = `${
-      activeSubmenusTotalCurrentHeight[0] +
-      activeSubmenusTotalCurrentHeight[1] +
-      40 * props.itemsLength
-    }px`;
-    // firstSubmenu.style.maxHeight = `${
-    //   activeSubmenusTotalCurrentHeight[0] +
-    //   activeSubmenusTotalCurrentHeight[1] +
-    //   40 * props.itemsLength
-    // }px`;
-  }
-  console.log(activeSubmenusTotalCurrentHeight);
+  // //show item while one item is currently open
+  // submenus.map(items => {
+  //   const itemArrowElem = getArrowIcon(items);
+  //   items.style.maxHeight = defaultSubmenuHeight;
+  //   itemArrowElem.style.transform = defaultArrowRotation;
+  // });
+
+  // //show item
+  // itemsRef.value.style.maxHeight = `${40 * props.itemsLength}px`;
+  // itemsRef.value.dataset.status = "show";
+  // arrowIcon.style.transform = "rotate(90deg)";
+
+  // //side effect for submenu height
+  // if (itemLevel === "root") {
+  //   if (firstSubmenu) {
+  //     itemsRef.value.style.maxHeight = `${
+  //       40 * props.itemsLength + getMaxHeight(firstSubmenu)
+  //     }px`;
+  //     console.log("root", "open", firstSubmenu);
+  //   }
+  // } else if (itemLevel === "first") {
+  //   //summation of root and second submenu's height
+  //   rootSubmenu.style.maxHeight = `${
+  //     activeSubmenusTotalCurrentHeight[0] + 40 * props.itemsLength
+  //   }px`;
+  // } else if (itemLevel === "second") {
+  //   console.log("second", activeSubmenusTotalCurrentHeight);
+  //   //summation of root,first,and second submenu's height
+  //   rootSubmenu.style.maxHeight = `${
+  //     activeSubmenusTotalCurrentHeight[0] +
+  //     activeSubmenusTotalCurrentHeight[1] +
+  //     40 * props.itemsLength
+  //   }px`;
+  //   //summation of first and second submenu's height
+  //   firstSubmenu.style.maxHeight = `${
+  //     activeSubmenusTotalCurrentHeight[1] + 40 * props.itemsLength
+  //   }px`;
+  // }
+  // console.log(activeSubmenusTotalCurrentHeight);
 };
 </script>
 
 <template>
   <BaseMenuItem
     @handleToggleItem="handleToggleItem"
-    v-show="sidebar.isOpen | (itemLevel === 'root')"
+    v-show="(sidebar.isOpen || sidebar.isHovering) | (itemLevel === 'root')"
     :href="href"
     :type="type"
     :itemLevel="itemLevel"
@@ -142,21 +163,21 @@ const handleToggleItem = () => {
   list-style: none;
   padding: 0;
 
-  &.root-submenu {
-    max-height: 0px;
-    overflow: hidden;
-  }
-  &.first-submenu {
-    max-height: 0px;
-    overflow: hidden;
-  }
-  &.second-submenu {
-    max-height: 0px;
-    overflow: hidden;
-  }
-  &.third-submenu {
-    max-height: 0px;
-    overflow: hidden;
-  }
+  // &.root-submenu {
+  //   max-height: 0px;
+  //   overflow: hidden;
+  // }
+  // &.first-submenu {
+  //   max-height: 0px;
+  //   overflow: hidden;
+  // }
+  // &.second-submenu {
+  //   max-height: 0px;
+  //   overflow: hidden;
+  // }
+  // &.third-submenu {
+  //   max-height: 0px;
+  //   overflow: hidden;
+  // }
 }
 </style>

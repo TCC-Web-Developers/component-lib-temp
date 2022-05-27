@@ -4,7 +4,7 @@ const sidebar = useSidebarStore();
 </script>
 
 <template>
-  <div v-show="sidebar.isOpen" class="menu-section-label">
+  <div v-show="sidebar.isOpen || sidebar.isHovering" class="menu-section-label">
     <slot></slot>
   </div>
 </template>

@@ -11,9 +11,9 @@ const sidebar = useSidebarStore();
 </script>
 
 <template>
-  <BaseHeader :isSidebarOpen="sidebar.isOpen">
+  <BaseHeader :isSidebarOpen="sidebar.isOpen || sidebar.isHovering">
     <template #header-logo>
-      <span v-show="sidebar.isOpen">
+      <span v-show="sidebar.isOpen || sidebar.isHovering">
         <BaseLogo :href="'/'">
           <img :src="Logo" />
         </BaseLogo>

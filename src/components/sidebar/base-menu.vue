@@ -1,3 +1,5 @@
+<script setup></script>
+
 <template>
   <div class="sidebar-menu-wrapper">
     <div class="sidebar-menu">

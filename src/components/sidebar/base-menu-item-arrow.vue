@@ -8,7 +8,7 @@ const props = defineProps({
 
 <template>
   <span
-    v-show="isShow ? sidebar.isOpen : false"
+    v-show="isShow ? sidebar.isOpen || sidebar.isHovering : false"
     class="menu-item-arrow d-flex justify-content-end"
   >
     <i class="bi bi-chevron-right"></i>

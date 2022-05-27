@@ -3,6 +3,7 @@
 $sidebar-states: (
   open: $open-sidebar-width,
   close: $close-sidebar-width,
+  hover: $open-sidebar-width,
 );
 
 @each $key, $width in $sidebar-states {
