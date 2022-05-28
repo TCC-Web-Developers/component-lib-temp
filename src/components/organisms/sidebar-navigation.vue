@@ -46,7 +46,7 @@ const handleMouseLeave = () => {
         :label="'Dashboard'"
         :type="'menu-item'"
         :href="'/'"
-        :isCollapsible="false"
+        :isLink="true"
       ></MenuItemSidebar>
 
       <BaseMenuSection v-for="menuSection in menus" :key="menuSection.id">
@@ -65,6 +65,7 @@ const handleMouseLeave = () => {
             :type="item.type"
             :href="item.url"
             :isCollapsible="item.isCollapsible"
+            :isLink="item.isLink"
           >
             <!-- FIRST LEVEL SUBMENU ITEMS -->
             <MenuItemSidebar
@@ -76,6 +77,8 @@ const handleMouseLeave = () => {
               :href="firstItem.url"
               :isCollapsible="firstItem.isCollapsible"
               :bulletType="firstItem.bulletType"
+              :parentTag="item.label"
+              :isLink="firstItem.isLink"
               :itemLevel="'first'"
             >
               <!-- SECOND LEVEL SUBMENU ITEMS   -->
@@ -88,6 +91,8 @@ const handleMouseLeave = () => {
                 :href="secondItem.url"
                 :isCollapsible="secondItem.isCollapsible"
                 :bulletType="secondItem.bulletType"
+                :parentTag="firstItem.label"
+                :isLink="secondItem.isLink"
                 :itemLevel="'second'"
               >
                 <!-- THIRD LEVEL SUBMENU ITEMS   -->
@@ -100,6 +105,8 @@ const handleMouseLeave = () => {
                   :href="thirdItem.url"
                   :isCollapsible="thirdItem.isCollapsible"
                   :bulletType="thirdItem.bulletType"
+                  :parentTag="secondItem.label"
+                  :isLink="thirdItem.isLink"
                   :itemLevel="'third'"
                 >
                 </MenuItemSidebar>

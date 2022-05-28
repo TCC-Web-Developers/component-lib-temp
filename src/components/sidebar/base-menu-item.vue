@@ -8,8 +8,8 @@ const props = defineProps({
 });
 const emit = defineEmits(["handleToggleItem"]);
 
-const handleToggleItem = () => {
-  emit("handleToggleItem");
+const handleToggleItem = event => {
+  emit("handleToggleItem", event);
 };
 </script>
 
@@ -19,6 +19,7 @@ const handleToggleItem = () => {
       @click="handleToggleItem"
       :href="href"
       class="d-flex align-items-center"
+      data-active="false"
       :class="[`${type}`, `${itemLevel}-level-item`]"
     >
       <slot name="menu-item"></slot>
