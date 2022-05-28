@@ -1,12 +1,13 @@
 <script setup>
-import { useSidebarStore } from "@/stores/sidebar.js";
-const sidebar = useSidebarStore();
+const props = defineProps({
+  isSidebarOpen: Boolean,
+});
 </script>
 
 <template>
   <div
     class="wrapper"
-    :class="[`wrapper-sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+    :class="[`wrapper-sidebar-${isSidebarOpen ? 'open' : 'close'}`]"
   >
     <slot name="navigation-bar"></slot>
     <slot name="main-content"></slot>

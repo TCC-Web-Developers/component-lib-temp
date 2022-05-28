@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { RouterView } from "vue-router";
 // import IconPlaceholder from "@/components/IconPlaceholder.vue";
 import SidebarNavigation from "@/components/organisms/sidebar-navigation.vue";
@@ -8,24 +8,37 @@ import MainContent from "@/components/organisms/main-content.vue";
 import BaseWrapper from "@/components/base-wrapper.vue";
 
 const isOffCanvasOpen = ref(false);
+const sidebar = ref(null);
 
-const handleToggleSidebar = () => {
+const handleToggleOffCanvas = () => {
   isOffCanvasOpen.value = !isOffCanvasOpen.value;
 };
+
+const handleToggleSidebar = () => {
+  sidebar.value.toggleSidebar();
+};
+
+const isSidebarOpen = computed(() => {
+  return sidebar.value && sidebar.value.isSidebarOpen;
+});
 </script>
 
 <template>
   <main class="">
     <div class="page d-flex flex-row">
       <div
-        @click="handleToggleSidebar"
+        @click="handleToggleOffCanvas"
         v-show="isOffCanvasOpen"
         class="overlay"
       ></div>
-      <SidebarNavigation :isOffCanvasOpen="isOffCanvasOpen" />
-      <BaseWrapper>
+      <SidebarNavigation ref="sidebar" :isOffCanvasOpen="isOffCanvasOpen" />
+      <BaseWrapper :isSidebarOpen="isSidebarOpen">
         <template #navigation-bar>
-          <NavigationBar @handleToggleSidebar="handleToggleSidebar" />
+          <NavigationBar
+            @handleToggleOffCanvas="handleToggleOffCanvas"
+            @handleToggleSidebar="handleToggleSidebar"
+            :isSidebarOpen="isSidebarOpen"
+          />
         </template>
         <template #main-content>
           <MainContent>

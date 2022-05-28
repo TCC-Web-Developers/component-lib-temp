@@ -1,13 +1,14 @@
 <script setup>
 import IconMenu from "@/components/icons/icon-menu.vue";
 import BaseSvgIcon from "@/components/global/base-svg-icon.vue";
-//States
-import { useSidebarStore } from "@/stores/sidebar.js";
 
-const sidebar = useSidebarStore();
+const props = defineProps({
+  isSidebarOpen: Boolean,
+});
+const emits = defineEmits(["toggleSidebar"]);
 
 const handleToggleSidebar = () => {
-  sidebar.toggleSidebar();
+  emits("toggleSidebar");
 };
 </script>
 
@@ -15,7 +16,7 @@ const handleToggleSidebar = () => {
   <button
     @click="handleToggleSidebar"
     class="menu-btn"
-    :class="[`menu-btn-${sidebar.isOpen ? 'open' : 'close'}`]"
+    :class="[`menu-btn-${isSidebarOpen ? 'open' : 'close'}`]"
   >
     <BaseSvgIcon class="open-state">
       <IconMenu class="svg-icon-md" />

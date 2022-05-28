@@ -4,23 +4,32 @@ import Logo from "@/assets/logo.svg";
 import BaseHeader from "@/components/sidebar/base-header.vue";
 import BaseMenuBtn from "@/components/sidebar/base-menu-btn.vue";
 import BaseLogo from "@/components/sidebar/base-logo.vue";
-//STATE
-import { useSidebarStore } from "@/stores/sidebar.js";
 
-const sidebar = useSidebarStore();
+const props = defineProps({
+  isSidebarOpen: Boolean,
+  isSidebarHovering: Boolean,
+});
+const emits = defineEmits(["toggleSidebar"]);
+
+const toggleSidebar = () => {
+  emits("toggleSidebar");
+};
 </script>
 
 <template>
-  <BaseHeader :isSidebarOpen="sidebar.isOpen || sidebar.isHovering">
+  <BaseHeader :isSidebarOpen="isSidebarOpen || isSidebarHovering">
     <template #header-logo>
-      <span v-show="sidebar.isOpen || sidebar.isHovering">
+      <span v-show="isSidebarOpen || isSidebarHovering">
         <BaseLogo :href="'/'">
           <img :src="Logo" />
         </BaseLogo>
       </span>
     </template>
     <template #header-menu-btn>
-      <BaseMenuBtn />
+      <BaseMenuBtn
+        @toggleSidebar="toggleSidebar"
+        :isSidebarOpen="isSidebarOpen"
+      />
     </template>
   </BaseHeader>
 </template>

@@ -1,14 +1,14 @@
 <script setup>
-import { useSidebarStore } from "@/stores/sidebar.js";
-const sidebar = useSidebarStore();
-
-const emit = defineEmits(["handleToggleSidebar"]);
+const props = defineProps({
+  isSidebarOpen: Boolean,
+});
+const emit = defineEmits(["handleToggleOffCanvas", "handleToggleSidebar"]);
 
 const handleToggleSidebar = () => {
-  emit("handleToggleSidebar");
+  emit("handleToggleOffCanvas");
 
-  if (!sidebar.isOpen) {
-    sidebar.toggleSidebar();
+  if (!props.isSidebarOpen) {
+    emit("handleToggleSidebar");
   }
 };
 </script>
@@ -16,7 +16,7 @@ const handleToggleSidebar = () => {
 <template>
   <div
     class="navbar px-2 d-flex align-items-center justify-content-end"
-    :class="[`navbar-sidebar-${sidebar.isOpen ? 'open' : 'close'}`]"
+    :class="[`navbar-sidebar-${isSidebarOpen ? 'open' : 'close'}`]"
   >
     <button
       @click="handleToggleSidebar"

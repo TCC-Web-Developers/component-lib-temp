@@ -1,13 +1,12 @@
 <script setup>
-import { useSidebarStore } from "@/stores/sidebar.js";
-const sidebar = useSidebarStore();
+const props = defineProps({
+  isSidebarOpen: Boolean,
+  isSidebarHovering: Boolean,
+});
 </script>
 
 <template>
-  <span
-    v-show="!sidebar.isOpen && !sidebar.isHovering"
-    class="menu-section-icon"
-  >
+  <span v-show="!isSidebarOpen && !isSidebarHovering" class="menu-section-icon">
     <i class="bi bi-three-dots"></i>
   </span>
 </template>

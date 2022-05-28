@@ -11,6 +11,8 @@ $font-size: 14px;
 $font-weight: 500;
 $font-family: "Poppins", sans-serif;
 
+// Hover and Focus
+
 // Icon
 @mixin item-icon() {
   pointer-events: none;
@@ -87,7 +89,9 @@ $font-family: "Poppins", sans-serif;
   background-color: rgba(0, 0, 0, 0);
   min-height: 44px;
 
-  &:hover {
+  &:hover,
+  &[data-active="true"],
+  &.active {
     background-color: rgba(black, 10%);
 
     .menu-item-label,
@@ -119,7 +123,9 @@ $item-level-pl: (
   background-color: rgba(0, 0, 0, 0);
   min-height: 40px;
 
-  &:hover {
+  &:hover,
+  &[data-active="true"],
+  &.active {
     background-color: rgba(black, 10%);
 
     .menu-item-label,

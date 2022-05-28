@@ -1,10 +1,12 @@
 <script setup>
-import { useSidebarStore } from "@/stores/sidebar.js";
-const sidebar = useSidebarStore();
+const props = defineProps({
+  isSidebarOpen: Boolean,
+  isSidebarHovering: Boolean,
+});
 </script>
 
 <template>
-  <div v-show="sidebar.isOpen || sidebar.isHovering" class="menu-section-label">
+  <div v-show="isSidebarOpen || isSidebarHovering" class="menu-section-label">
     <slot></slot>
   </div>
 </template>

@@ -5,6 +5,7 @@ const props = defineProps({
   href: String,
   type: String,
   itemLevel: String,
+  currentRoute: String,
 });
 const emit = defineEmits(["handleToggleItem"]);
 
@@ -20,7 +21,11 @@ const handleToggleItem = event => {
       :href="href"
       class="d-flex align-items-center"
       data-active="false"
-      :class="[`${type}`, `${itemLevel}-level-item`]"
+      :class="[
+        `${type}`,
+        `${itemLevel}-level-item`,
+        currentRoute === href ? 'active' : '',
+      ]"
     >
       <slot name="menu-item"></slot>
     </BaseLink>

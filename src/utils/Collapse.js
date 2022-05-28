@@ -42,11 +42,17 @@ class Collapse {
     submenu.style.maxHeight = `${
       this.itemHeight * this.itemsLength + allActiveSubmenusTotalHeight
     }px`;
+    //
+    submenu.previousElementSibling.dataset.active = "true";
+    //
     this.setStatusShow(submenu);
     this.animateArrow(submenu, "show");
   }
   // Hide submenu
   hideSubmenu(submenu) {
+    //
+    submenu.previousElementSibling.dataset.active = "false";
+    //
     submenu.style.maxHeight = "0px";
     this.setStatusHidden(submenu);
     this.animateArrow(submenu, "hidden");
@@ -55,6 +61,9 @@ class Collapse {
   hideAllSubmenu(submenus) {
     submenus.forEach(submenu => {
       submenu.style.maxHeight = "0px";
+      //
+      submenu.previousElementSibling.dataset.active = "false";
+      //
       this.setStatusHidden(submenu);
       this.animateArrow(submenu, "hidden");
     });

@@ -6,28 +6,38 @@ import MenuItemSidebar from "@/components/molecules/menu-item-sidebar.vue";
 import BaseMenuSection from "@/components/sidebar/base-menu-section.vue";
 import MenuSectionHeaderSidebar from "@/components/molecules/menu-section-header-sidebar.vue";
 import BaseMenu from "@/components/sidebar/base-menu.vue";
-//STATES
-import { useSidebarStore } from "@/stores/sidebar.js";
 //DATA
 import menusObject from "@/data/menus.js";
 
 const props = defineProps({
   isOffCanvasOpen: Boolean,
 });
+
+const isSidebarOpen = ref(true);
+const isSidebarHovering = ref(false);
 const menus = ref(menusObject);
-const sidebar = useSidebarStore();
+
+const toggleSidebar = () => {
+  isSidebarOpen.value = !isSidebarOpen.value;
+};
 
 const handleMouseEnter = () => {
-  if (!sidebar.isOpen) {
-    sidebar.mouseOverSidebar();
+  if (!isSidebarOpen.value) {
+    isSidebarHovering.value = true;
   }
 };
 
 const handleMouseLeave = () => {
-  if (!sidebar.isOpen) {
-    sidebar.mouseLeaveSidebar();
+  if (!isSidebarOpen.value) {
+    isSidebarHovering.value = false;
   }
 };
+
+defineExpose({
+  isSidebarOpen,
+  isSidebarHovering,
+  toggleSidebar,
+});
 </script>
 
 <template>
@@ -35,29 +45,40 @@ const handleMouseLeave = () => {
     class="sidebar-mobile d-flex flex-column flex-row-auto"
     :class="[
       `sidebar-${
-        sidebar.isOpen ? 'open' : sidebar.isHovering ? 'hover' : 'close'
+        isSidebarOpen ? 'open' : isSidebarHovering ? 'hover' : 'close'
       }`,
       `${isOffCanvasOpen ? 'open-sidebar-mobile' : ''}`,
     ]"
   >
-    <HeaderSidebar />
+    <HeaderSidebar
+      @toggleSidebar="toggleSidebar"
+      :isSidebarOpen="isSidebarOpen"
+      :isSidebarHovering="isSidebarHovering"
+    />
     <BaseMenu @mouseenter="handleMouseEnter" @mouseleave="handleMouseLeave">
       <MenuItemSidebar
+        :isSidebarOpen="isSidebarOpen"
+        :isSidebarHovering="isSidebarHovering"
         :label="'Dashboard'"
-        :type="'menu-item'"
+        :type="'link-item'"
         :href="'/'"
         :isLink="true"
       ></MenuItemSidebar>
 
       <BaseMenuSection v-for="menuSection in menus" :key="menuSection.id">
         <template #menu-section-header>
-          <MenuSectionHeaderSidebar>
+          <MenuSectionHeaderSidebar
+            :isSidebarOpen="isSidebarOpen"
+            :isSidebarHovering="isSidebarHovering"
+          >
             {{ menuSection.headerLabel }}
           </MenuSectionHeaderSidebar>
         </template>
         <template #menu-items>
           <!-- MENU ITEMS -->
           <MenuItemSidebar
+            :isSidebarOpen="isSidebarOpen"
+            :isSidebarHovering="isSidebarHovering"
             v-for="item in menuSection.items"
             :key="item.id"
             :itemsLength="item.items.length"
@@ -69,6 +90,8 @@ const handleMouseLeave = () => {
           >
             <!-- FIRST LEVEL SUBMENU ITEMS -->
             <MenuItemSidebar
+              :isSidebarOpen="isSidebarOpen"
+              :isSidebarHovering="isSidebarHovering"
               v-for="firstItem in item.items"
               :key="firstItem.id"
               :itemsLength="firstItem.items.length"
@@ -83,6 +106,8 @@ const handleMouseLeave = () => {
             >
               <!-- SECOND LEVEL SUBMENU ITEMS   -->
               <MenuItemSidebar
+                :isSidebarOpen="isSidebarOpen"
+                :isSidebarHovering="isSidebarHovering"
                 v-for="secondItem in firstItem.items"
                 :key="secondItem.id"
                 :itemsLength="secondItem.items.length"
@@ -97,6 +122,8 @@ const handleMouseLeave = () => {
               >
                 <!-- THIRD LEVEL SUBMENU ITEMS   -->
                 <MenuItemSidebar
+                  :isSidebarOpen="isSidebarOpen"
+                  :isSidebarHovering="isSidebarHovering"
                   v-for="thirdItem in secondItem.items"
                   :key="thirdItem.id"
                   :itemsLength="thirdItem.items.length"
