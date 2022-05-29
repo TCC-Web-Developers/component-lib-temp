@@ -15,6 +15,7 @@ $header-padding-x: $padding-x;
   outline: none;
   border: none;
   background-color: transparent;
+  transition: $transition;
 
   &.menu-btn-open {
     transform: rotateY(0deg);
@@ -22,6 +23,14 @@ $header-padding-x: $padding-x;
 
   &.menu-btn-close {
     transform: rotate(180deg);
+
+    & > span {
+      svg {
+        path {
+          fill: $icon-secondary;
+        }
+      }
+    }
   }
 
   @media (max-width: $lg) {

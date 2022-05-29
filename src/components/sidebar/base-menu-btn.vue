@@ -18,7 +18,7 @@ const handleToggleSidebar = () => {
     class="menu-btn"
     :class="[`menu-btn-${isSidebarOpen ? 'open' : 'close'}`]"
   >
-    <BaseSvgIcon class="open-state">
+    <BaseSvgIcon>
       <IconMenu class="svg-icon-md" />
     </BaseSvgIcon>
   </button>

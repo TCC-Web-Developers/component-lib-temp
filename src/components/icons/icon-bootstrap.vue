@@ -21,7 +21,6 @@
     />
   </svg>
 </template>
-
 <style lang="scss" scoped>
 @import "@/assets/scss/components/menu-item.scss";
 </style>

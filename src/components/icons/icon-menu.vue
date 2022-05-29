@@ -21,3 +21,6 @@
     />
   </svg>
 </template>
+<style lang="scss" scoped>
+@import "@/assets/scss/components/sidebar-header.scss";
+</style>
