@@ -1,20 +1,24 @@
-@import "./custom-variables.scss";
+@import "./variables.scss";
+
+@mixin large-screen() {
+  @media (max-width: 992px) {
+    left: 0;
+  }
+}
 
 .navbar {
   position: fixed;
   top: 0;
   right: 0;
-  left: $open-sidebar-width;
-  z-index: 99;
   height: $navbar-height;
   background-color: rgb(236, 236, 236);
+  z-index: 99;
 
+  // navbar when sidebar open or close
   &.navbar-sidebar-open {
-    left: $open-sidebar-width;
+    left: $navbar-width;
 
-    @media (max-width: 992px) {
-      left: 0;
-    }
+    @include large-screen();
   }
 
   &.navbar-sidebar-close {
@@ -22,12 +26,8 @@
       $open-sidebar-width + ($close-sidebar-width - $open-sidebar-width)
     );
 
-    @media (max-width: 992px) {
-      left: 0;
-    }
+    @include large-screen();
   }
 
-  @media (max-width: 992px) {
-    left: 0;
-  }
+  @include large-screen();
 }

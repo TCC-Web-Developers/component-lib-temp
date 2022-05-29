@@ -1,12 +1,13 @@
-$height: 72px;
-$padding-x: 25px;
+@import "../variables.scss";
+
+$header-height: $navbar-height;
+$header-padding-x: $padding-x;
 
 // Header
 .sidebar-header {
   flex: none;
-  height: $height;
-  background-color: salmon;
-  padding: 0 $padding-x;
+  height: $header-height;
+  padding: 0 $header-padding-x;
 }
 
 // Menu Btn
@@ -23,7 +24,7 @@ $padding-x: 25px;
     transform: rotate(180deg);
   }
 
-  @media (max-width: 992px) {
+  @media (max-width: $lg) {
     display: none;
   }
 }

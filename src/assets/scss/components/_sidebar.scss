@@ -1,4 +1,4 @@
-@import "../custom-variables.scss";
+@import "../variables.scss";
 
 $sidebar-states: (
   open: $open-sidebar-width,
@@ -23,15 +23,3 @@ $sidebar-states: (
     transition: $transition;
   }
 }
-
-$utilities: (
-  "gradient": (
-    property: background,
-    class: bg,
-    values: (
-      gradient: transparent
-        linear-gradient(180deg, $bg-color-top 0%, $bg-color-bottom 100%) 0% 0%
-        no-repeat padding-box,
-    ),
-  ),
-);

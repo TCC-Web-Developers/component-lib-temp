@@ -1,0 +1,44 @@
+// == COLOR ==
+
+// Primary
+$primary: #fdab40;
+// BG Gradient
+$bg-color-top: #ffc674;
+$bg-color-bottom: #f7ae46;
+// Icon
+$icon-primary: #ffffff;
+
+// == SIZE ==
+
+// Sidebar
+$open-sidebar-width: 265px;
+$close-sidebar-width: 70px;
+
+// Navbar
+$navbar-height: 72px;
+$navbar-width: $open-sidebar-width;
+
+// ICON
+$icon-size: 23px;
+
+// Menu Item
+$menu-item-min-height: 44px;
+// Submenu Item
+$submenu-item-min-height: 40px;
+
+// == SPACE ==
+
+// Items and Header
+$padding-x: 25px;
+$padding-y: 9px;
+
+// == FONT ==
+$font-size: 14px;
+$font-weight: 500;
+$font-family: "Poppins", sans-serif;
+
+// == TRANSITION ==
+$transition: 0s width linear;
+
+// == BREAKPOINTS ==
+$lg: 992px;

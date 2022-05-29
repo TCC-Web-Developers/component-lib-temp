@@ -1,4 +1,10 @@
-@import "./custom-variables.scss";
+@import "./variables.scss";
+
+@mixin large-screen() {
+  @media (max-width: 992px) {
+    padding: $navbar-height 0 0 0;
+  }
+}
 
 .wrapper {
   min-height: 100vh;
@@ -8,20 +14,14 @@
 
   &.wrapper-sidebar-open {
     padding: $navbar-height 0 0 $open-sidebar-width;
-    @media (max-width: 992px) {
-      padding: $navbar-height 0 0 0;
-    }
+    @include large-screen();
   }
 
   &.wrapper-sidebar-close {
     padding: $navbar-height 0 0
       calc($open-sidebar-width + ($close-sidebar-width - $open-sidebar-width));
-    @media (max-width: 992px) {
-      padding: $navbar-height 0 0 0;
-    }
+    @include large-screen();
   }
 
-  @media (max-width: 992px) {
-    padding: $navbar-height 0 0 0;
-  }
+  @include large-screen();
 }

@@ -1,44 +1,35 @@
+@import "../variables.scss";
+
 // Base Color
-$base-color: #ffffff;
+$base-color: $icon-primary;
 $base-opacity: 90%;
 
-// Menu Item Spacing
-$padding-x: 25px;
-$padding-y: 9px;
-
-// Font
-$font-size: 14px;
-$font-weight: 500;
-$font-family: "Poppins", sans-serif;
-
-// Hover and Focus
-
 // Icon
-@mixin item-icon() {
+@mixin item-icon {
   pointer-events: none;
   opacity: $base-opacity;
 }
 
 .menu-item-icon {
-  @include item-icon();
+  @include item-icon;
   flex: 0 0 35px;
 
   svg {
-    height: 23px;
-    width: 23px;
+    height: $icon-size;
+    width: $icon-size;
     margin-left: -2px;
   }
 }
 
 .dash-bullet-icon {
-  @include item-icon();
+  @include item-icon;
   flex: 0 0 22px;
   color: $base-color;
   font-size: 0.8rem;
 }
 
 .dot-bullet-icon {
-  @include item-icon();
+  @include item-icon;
   flex: 0 0 22px;
   color: $base-color;
   font-size: 1.2rem;
@@ -87,7 +78,7 @@ $font-family: "Poppins", sans-serif;
   padding: $padding-y $padding-x;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
-  min-height: 44px;
+  min-height: $menu-item-min-height;
 
   &:hover,
   &[data-active="true"],
@@ -121,7 +112,7 @@ $item-level-pl: (
   padding: 0 $padding-x;
   text-decoration: none;
   background-color: rgba(0, 0, 0, 0);
-  min-height: 40px;
+  min-height: $submenu-item-min-height;
 
   &:hover,
   &[data-active="true"],

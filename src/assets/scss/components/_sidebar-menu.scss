@@ -1,7 +1,11 @@
+@import "../variables.scss";
+
 $sidebar-menu-margin-y: 13px;
-$header-height: 72px;
+$header-height: $navbar-height;
 //for responsive pixeled height
-$sidebar-menu-height:  calc(100vh - $header-height - ($sidebar-menu-margin-y * 2));
+$sidebar-menu-height: calc(
+  100vh - $header-height - ($sidebar-menu-margin-y * 2)
+);
 
 .sidebar-menu-wrapper {
   flex: 1 0 auto;

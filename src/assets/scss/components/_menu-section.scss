@@ -1,10 +1,12 @@
-$height: 24px;
+@import "../variables.scss";
+
+$menu-section-padding-x: $padding-x;
 
 // Menu Section Label Wrapper
 .menu-section-label-wrapper {
   margin: 20px 0 0 0;
   height: 40px;
-  padding: 0 25px;
+  padding: 0 $menu-section-padding-x;
 }
 
 // Menu Items Container
