@@ -1,3 +1,5 @@
+const { mergeConfig } = require("vite");
+const { fileURLToPath, URL, pathToFileURL } = require("url");
 const path = require("path");
 
 module.exports = {
@@ -6,28 +8,25 @@ module.exports = {
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
-    ,
   ],
-  webpackFinal: async (config, { configType }) => {
-    // `configType` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-    // You can change the configuration based on that.
-    // 'PRODUCTION' is used when building the static version of storybook.
-
-    // Make whatever fine-grained changes you need
-    config.module.rules.push({
-      test: /\.scss$/,
-      use: ["style-loader", "css-loader", "sass-loader"],
-      include: path.resolve(__dirname, "../"),
-    });
-
-    // Return the altered config
-    return config;
-  },
   framework: "@storybook/vue3",
   core: {
     builder: "@storybook/builder-vite",
   },
   features: {
     storyStoreV7: true,
+  },
+  async viteFinal(config, { configType }) {
+    // return the customized config
+    return mergeConfig(config, {
+      // customize the Vite config here
+      resolve: {
+        alias: {
+          "@": fileURLToPath(
+            new URL("./src", pathToFileURL(__filename).toString())
+          ),
+        },
+      },
+    });
   },
 };

@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, shallowRef } from "vue";
+import { ref, computed, shallowRef, watch, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import BaseMenuItem from "@/components/sidebar/base-menu-item.vue";
 import BaseMenuItemLabel from "@/components/sidebar/base-menu-item-label.vue";
@@ -114,9 +114,11 @@ const icons = shallowRef([
 ]);
 const router = useRouter();
 const itemsRef = ref(null);
+const heightRef = ref([]);
 const props = defineProps({
   isSidebarOpen: Boolean,
   isSidebarHovering: Boolean,
+  id: Number,
   href: String,
   itemsLength: Number,
   label: String,
@@ -131,17 +133,63 @@ const props = defineProps({
   isCollapsible: { type: Boolean, default: false },
   isLink: { type: Boolean, default: false },
   parentTag: String,
+  activeItems: Object,
 });
+const emits = defineEmits(["handleToggleItem"]);
 
-const handleToggleItem = event => {
-  if (!props.isCollapsible) return;
-  const submenu = new Collapse(itemsRef.value, 40, props.itemsLength);
-  submenu.activate();
+const handleToggleItem = () => {
+  const itemData = {
+    itemType: props.type,
+    level: props.itemLevel,
+    parent: props.parentTag,
+    id: props.id,
+  };
+  emits("handleToggleItem", itemData);
+  // if (!props.isCollapsible) return;
+  // const submenu = new Collapse(itemsRef.value, 40, props.itemsLength);
+  // submenu.activate();
 };
 
 const currentRoute = computed(() => {
   return router.currentRoute.value.fullPath;
 });
+
+// const rootSubmenuHeight = computed(() => {
+//   return
+// })
+
+watch(
+  () => props.activeItems,
+  (newValue, oldValue) => {
+    const { activeRootItem } = newValue;
+    if (props.itemLevel === "root") {
+      const { id } = activeRootItem;
+      if (props.id === id) {
+        if (heightRef.value > 0) {
+          heightRef.value = 0;
+          return;
+        }
+        heightRef.value = 40 * props.itemsLength;
+      } else {
+        heightRef.value = 0;
+      }
+    }
+    if (props.itemLevel === "first") {
+      console.log("firsttt");
+    }
+    // const { activeRootItem } = newValue;
+    // // console.log("ACTIVE ROO", activeRootItem);
+    // if (props.itemLevel === "root") {
+    //   const { id } = activeRootItem;
+    //   if (heightRef.value > 0) {
+    //     heightRef.value = 0;
+    //     return;
+    //   }
+    //   heightRef.value = props.id === id ? 40 * props.itemsLength : 0;
+    // }
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -152,8 +200,10 @@ const currentRoute = computed(() => {
     :type="type"
     :itemLevel="itemLevel"
     :currentRoute="currentRoute"
+    ref="anchorRef"
   >
     <template #menu-item>
+      <!-- {{ childrenLinks.includes(currentRoute) ? "active" : "hidden" }} -->
       <BaseMenuItemIcon
         v-if="type === 'menu-item' || (isLink && itemLevel === 'root')"
       >
@@ -183,6 +233,7 @@ const currentRoute = computed(() => {
         :data-level="itemLevel"
         :data-label="label"
         :data-tag="parentTag"
+        :style="{ maxHeight: `${heightRef}px` }"
       >
         <slot></slot>
       </ul>

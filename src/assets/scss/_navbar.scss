@@ -6,12 +6,44 @@
   }
 }
 
+@mixin menu-item-active {
+  background-color: #f3f6f9;
+  .svg-icon {
+    svg {
+      path {
+        fill: $primary;
+      }
+    }
+  }
+
+  .submenu-item-label {
+    color: $primary;
+  }
+
+  i {
+    color: $primary;
+  }
+}
+
+span {
+  &.menu-item-label {
+    display: block;
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 500;
+    color: #3f4254;
+    font-family: Poppins, Helvetica, "sans-serif";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
 .navbar {
+  padding: 0 25px;
   position: fixed;
   top: 0;
   right: 0;
   height: $navbar-height;
-  background-color: rgb(236, 236, 236);
+  background-color: white;
   z-index: 99;
 
   // navbar when sidebar open or close
@@ -30,4 +62,161 @@
   }
 
   @include large-screen();
+
+  //navbar's default list and link
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    height: 100%;
+
+    li {
+      height: 100%;
+
+      a {
+        text-decoration: none;
+        color: #6c7293;
+      }
+    }
+  }
+
+  .navbar-menu-wrapper {
+    -webkit-box-align: stretch;
+    -ms-flex-align: stretch;
+    align-items: stretch;
+
+    .menu-item {
+      position: relative;
+      .menu-link {
+        display: block;
+        width: 100%;
+        padding: 11px 30px;
+
+        .svg-icon {
+          flex: 0 0 33px;
+          svg {
+            height: 19.5px;
+            width: 19.5px;
+
+            path {
+              fill: #b5b5c3;
+            }
+          }
+        }
+
+        .submenu-item-label {
+          flex-grow: 1;
+          font-weight: 400;
+        }
+
+        i {
+          width: 0;
+          font-size: 1.2rem;
+          flex: 0 0 24px;
+          margin-left: -6px;
+          &::before {
+            display: flex;
+            justify-content: flex-start;
+          }
+        }
+
+        .arrow-icon {
+          font-size: 0.75rem;
+          margin-left: 0px;
+          &::before {
+            display: flex;
+            justify-content: flex-end;
+          }
+        }
+
+        &:hover {
+          @include menu-item-active;
+        }
+      }
+
+      &.menu-item-active {
+        @include menu-item-active;
+      }
+    }
+
+    .navbar-menu {
+      height: 100%;
+      .menu-nav {
+        .main-menu-item {
+          position: relative;
+          padding-right: 0.25rem;
+
+          &:hover > .main-menu-item-link {
+            background-color: rgba(77, 89, 149, 0.06);
+            color: $primary;
+          }
+          &.main-menu-item-active > .main-menu-item-link {
+            background-color: rgba(77, 89, 149, 0.06);
+            color: $primary;
+          }
+
+          .main-menu-item-link {
+            border-radius: 4px;
+            padding: 8px 14px;
+          }
+
+          .menu-submenu {
+            display: none;
+            background-color: white;
+            width: 275px;
+            margin: 0 auto;
+            position: absolute;
+            padding: 20px 0px;
+            z-index: 98;
+            top: 110%;
+            left: 0;
+            right: auto;
+            transform: translateZ(0);
+            transform-style: preserve-3d;
+            border-radius: 4px;
+            -webkit-box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
+            box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
+            animation: submenuIn 0.2s ease-out forwards;
+
+            &.menu-submenu-show {
+              display: block;
+            }
+
+            @keyframes submenuIn {
+              from {
+                top: 110%;
+              }
+              to {
+                top: 100%;
+              }
+            }
+
+            .subitem-subnav {
+              display: hidden;
+              top: 0%;
+              margin-left: 2px;
+              opacity: 0;
+              left: 100%;
+              animation: subnavIn 0.15s ease-out forwards;
+
+              &.subitem-subnav-show {
+                display: block;
+              }
+
+              @keyframes subnavIn {
+                from {
+                  top: -110%;
+                  opacity: 0;
+                }
+                to {
+                  top: 0%;
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

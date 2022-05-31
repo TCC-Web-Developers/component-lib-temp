@@ -22,6 +22,10 @@ class Collapse {
       this.showSubmenu(this.submenu);
     }
   }
+
+  isShow() {
+    return this.status === "show" ? true : false;
+  }
   // ===
 
   // === GET ELEMENT ===

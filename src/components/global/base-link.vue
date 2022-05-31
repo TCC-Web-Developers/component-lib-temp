@@ -15,4 +15,10 @@ const props = defineProps({
   >
     <slot></slot>
   </RouterLink>
+  <!-- <RouterLink
+    :to="href === 'javascript:;' ? router.currentRoute.value.fullPath : href"
+    class="base-link"
+  >
+    <slot></slot>
+  </RouterLink> -->
 </template>

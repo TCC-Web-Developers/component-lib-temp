@@ -9,8 +9,8 @@ const props = defineProps({
 });
 const emit = defineEmits(["handleToggleItem"]);
 
-const handleToggleItem = event => {
-  emit("handleToggleItem", event);
+const handleToggleItem = () => {
+  emit("handleToggleItem");
 };
 </script>
 

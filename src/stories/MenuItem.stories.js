@@ -1,18 +1,18 @@
-import MenuItem from "../components/molecules/menu-item-sidebar.vue";
+// import MenuItem from "../components/molecules/menu-item-sidebar.vue";
 
-export default {
-  title: "Sidebar/Menu Item",
-  component: MenuItem,
-  // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
-  //   argTypes: {
-  //     backgroundColor: { control: "color" },
-  //     onClick: {},
-  //     size: {
-  //       control: { type: "select" },
-  //       options: ["small", "medium", "large"],
-  //     },
-  //   },
-};
+// export default {
+//   title: "Sidebar/Menu Item",
+//   component: MenuItem,
+//   // More on argTypes: https://storybook.js.org/docs/vue/api/argtypes
+//   //   argTypes: {
+//   //     backgroundColor: { control: "color" },
+//   //     onClick: {},
+//   //     size: {
+//   //       control: { type: "select" },
+//   //       options: ["small", "medium", "large"],
+//   //     },
+//   //   },
+// };
 
 // export default {
 //   /* 👇 The title prop is optional.
@@ -23,7 +23,7 @@ export default {
 //   component: ItemLabel,
 // };
 
-export const Primary = () => ({
-  components: { MenuItem },
-  template: `<MenuItem :label="item"></MenuItem>`,
-});
+// export const Primary = () => ({
+//   components: { MenuItem },
+//   template: `<MenuItem :label="item"></MenuItem>`,
+// });

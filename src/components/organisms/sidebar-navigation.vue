@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from "vue";
+import { ref, computed, watch, reactive } from "vue";
+import { useRouter } from "vue-router";
 //COMPONENTS
 import HeaderSidebar from "@/components/molecules/header-sidebar.vue";
 import MenuItemSidebar from "@/components/molecules/menu-item-sidebar.vue";
@@ -13,8 +14,11 @@ const props = defineProps({
   isOffCanvasOpen: Boolean,
 });
 
+const router = useRouter();
 const isSidebarOpen = ref(true);
 const isSidebarHovering = ref(false);
+const activeRootItem = ref(null);
+const activeFirstItem = ref(null);
 const menus = ref(menusObject);
 
 const toggleSidebar = () => {
@@ -32,6 +36,26 @@ const handleMouseLeave = () => {
     isSidebarHovering.value = false;
   }
 };
+
+const handleToggleItem = itemData => {
+  const { level, id } = itemData;
+
+  if (level === "root") {
+    activeRootItem.value = itemData;
+  }
+  if (level === "first") {
+    activeFirstItem.value = itemData;
+  }
+
+  console.log(itemData);
+};
+
+const activeItems = computed(() => {
+  return {
+    activeRootItem: activeRootItem.value,
+    activeFirstItem: activeFirstItem.value,
+  };
+});
 
 defineExpose({
   isSidebarOpen,
@@ -77,23 +101,28 @@ defineExpose({
         <template #menu-items>
           <!-- MENU ITEMS -->
           <MenuItemSidebar
+            @handleToggleItem="handleToggleItem"
             :isSidebarOpen="isSidebarOpen"
             :isSidebarHovering="isSidebarHovering"
             v-for="item in menuSection.items"
             :key="item.id"
+            :id="item.id"
             :itemsLength="item.items.length"
             :label="item.label"
             :type="item.type"
             :href="item.url"
             :isCollapsible="item.isCollapsible"
             :isLink="item.isLink"
+            :activeItems="activeItems"
           >
             <!-- FIRST LEVEL SUBMENU ITEMS -->
             <MenuItemSidebar
+              @handleToggleItem="handleToggleItem"
               :isSidebarOpen="isSidebarOpen"
               :isSidebarHovering="isSidebarHovering"
               v-for="firstItem in item.items"
               :key="firstItem.id"
+              :id="firstItem.id"
               :itemsLength="firstItem.items.length"
               :label="firstItem.label"
               :type="firstItem.type"
@@ -103,6 +132,7 @@ defineExpose({
               :parentTag="item.label"
               :isLink="firstItem.isLink"
               :itemLevel="'first'"
+              :activeItems="activeItems"
             >
               <!-- SECOND LEVEL SUBMENU ITEMS   -->
               <MenuItemSidebar
