@@ -1,4 +1,8 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  isSidebarOpen: Boolean,
+});
+</script>
 
 <template>
   <div
@@ -23,7 +27,7 @@
         </div>
       </div>
       <div class="topbar">
-        <slot name="navbar-menu-topbar"></slot>
+        <slot name="navbar-topbar"></slot>
       </div>
     </div>
   </div>

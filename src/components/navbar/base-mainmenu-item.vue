@@ -1,10 +1,17 @@
-<script setup></script>
+<script setup>
+const emits = defineEmits(["handleClickItem"]);
+
+const handleClickItem = () => {
+  emits("handleClickItem");
+};
+</script>
 
 <template>
   <li class="d-flex align-items-center main-menu-item">
-    <a href="#" class="main-menu-item-link">
+    <a @click="handleClickItem" href="#" class="main-menu-item-link">
       <slot></slot>
     </a>
+    <slot name="submenu"></slot>
   </li>
 </template>
 

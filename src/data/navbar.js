@@ -9,11 +9,11 @@ const navBar = [
   //     label: "features",
   //     isActive: false,
   //   },
-  //   {
-  //     id: 3,
-  //     label: "apps",
-  //     isActive: false,
-  //   },
+  {
+    id: 3,
+    label: "apps",
+    isActive: false,
+  },
 ];
 
 export default navBar;

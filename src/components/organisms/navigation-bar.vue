@@ -1,5 +1,6 @@
 <script setup>
 import { ref, computed } from "vue";
+import BaseNavbar from "@/components/navbar/base-navbar.vue";
 import SubmenuItem from "@/components/molecules/navbar/submenu-item.vue";
 import MainmenuItem from "@/components/molecules/navbar/mainmenu-item.vue";
 import BaseSubmenu from "@/components/navbar/base-submenu.vue";
@@ -20,12 +21,29 @@ const handleToggleSidebar = () => {
     emit("handleToggleSidebar");
   }
 };
-const navbar = ref(navbar_data);
+const navbar = ref([...navbar_data]);
 const pages = ref(pages_data);
 const apps = ref(apps_data);
+
 const click = () => {
   // show.value = !show.value;
   // console.log(firstDropdownRef.value);
+};
+
+const handleClickItem = id => {
+  navbar.value = [...navbar.value].map(item => {
+    if (item.id === id) {
+      return {
+        ...item,
+        isActive: !item.isActive,
+      };
+    } else {
+      return {
+        ...item,
+        isActive: false,
+      };
+    }
+  });
 };
 
 const items = computed(() => {
@@ -40,81 +58,62 @@ const items = computed(() => {
     },
   ];
 });
+
+// watch(
+//   () => navbar.value,
+//   (newValue, oldValue) => {
+//     console.log(newValue, oldValue);
+//   }
+// );
 </script>
 
 <template>
-  <div
-    class="navbar d-flex align-items-center justify-content-end"
-    :class="[`navbar-sidebar-${isSidebarOpen ? 'open' : 'close'}`]"
-  >
-    <div
-      class="
-        container-fluid
-        d-flex
-        align-items-stretch
-        justify-content-between
-        h-100
-        px-0
-      "
-    >
-      <div class="navbar-menu-wrapper">
-        <div class="navbar-menu">
-          <ul class="menu-nav d-flex">
-            <MainmenuItem
-              v-for="navbarItem in navbar"
-              :key="navbarItem.id"
-              :class="[navbarItem.isActive ? 'main-menu-item-active' : '']"
+  <BaseNavbar :isSidebarOpen="isSidebarOpen">
+    <template #navbar-menu-items>
+      <MainmenuItem
+        v-for="navbarItem in navbar"
+        :key="navbarItem.id"
+        @handleClickItem="handleClickItem(navbarItem.id)"
+        :class="[navbarItem.isActive ? 'main-menu-item-active' : '']"
+      >
+        <template #main-menu-label>
+          <BaseLabel @click="click">{{ navbarItem.label }}</BaseLabel>
+        </template>
+        <template #main-menu-submenu>
+          <BaseSubmenu
+            :class="[navbarItem.isActive ? 'menu-submenu-show' : '', '']"
+          >
+            <SubmenuItem
+              v-for="item in items.find(item => item.label === navbarItem.label)
+                .items"
+              :key="item.id"
+              :isCollapsible="item.isCollapsible"
+              :label="item.label"
             >
-              <template #main-menu-label>
-                <BaseLabel @click="click">{{ navbarItem.label }}</BaseLabel>
-              </template>
-              <template #main-menu-submenu>
-                <BaseSubmenu
-                  :class="[
-                    show ? 'menu-submenu-show' : '',
-                    'menu-submenu-show',
-                  ]"
-                >
-                  <SubmenuItem
-                    v-for="item in items.find(
-                      item => item.label === navbarItem.label
-                    ).items"
-                    :key="item.id"
-                    :isCollapsible="item.isCollapsible"
-                    :label="item.label"
-                  >
-                    <SubmenuItem
-                      v-for="item in item.items"
-                      :key="item.id"
-                      :isCollapsible="item.isCollapsible"
-                      :icon="'bullet'"
-                      :bulletType="item.bulletType"
-                      :label="item.label"
-                      :parentLabel="item.label"
-                    >
-                    </SubmenuItem>
-                  </SubmenuItem>
-                </BaseSubmenu>
-              </template>
-            </MainmenuItem>
-          </ul>
-        </div>
-      </div>
-      <div class="topbar">
-        <button @click="click">TEST</button>
-      </div>
-    </div>
-  </div>
+              <SubmenuItem
+                v-for="item in item.items"
+                :key="item.id"
+                :isCollapsible="item.isCollapsible"
+                :icon="'bullet'"
+                :bulletType="item.bulletType"
+                :label="item.label"
+                :parentLabel="item.label"
+              >
+              </SubmenuItem>
+            </SubmenuItem>
+          </BaseSubmenu>
+        </template>
+      </MainmenuItem>
+    </template>
+    <template #navbar-topbar>
+      <button @click="click">TEST</button>
+    </template>
+  </BaseNavbar>
 </template>
 
 <style lang="scss" scoped>
 @import "@/assets/scss/navbar.scss";
 @import "@/assets/scss/custom.scss";
-
-.menu {
-  background-color: coral;
-  color: white;
-}
 </style>
 
 <!-- <button
