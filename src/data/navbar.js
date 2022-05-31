@@ -4,11 +4,11 @@ const navBar = [
     label: "pages",
     isActive: true,
   },
-  //   {
-  //     id: 2,
-  //     label: "features",
-  //     isActive: false,
-  //   },
+  {
+    id: 2,
+    label: "features",
+    isActive: false,
+  },
   {
     id: 3,
     label: "apps",

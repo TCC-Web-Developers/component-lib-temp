@@ -126,39 +126,41 @@ const features = [
       {
         id: 0,
         label: "analytical reports",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
       {
         id: 1,
         label: "customer CRM",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
       {
         id: 2,
         label: "operational growth",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
       {
         id: 3,
         label: "socail media presence",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
       {
         id: 4,
         label: "files and directories",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
       {
         id: 5,
         label: "audit and logs",
-        bulletType: null,
+        bulletType: "none",
         url: null,
       },
     ],
   },
 ];
+
+export default features;

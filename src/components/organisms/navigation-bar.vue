@@ -6,8 +6,9 @@ import MainmenuItem from "@/components/molecules/navbar/mainmenu-item.vue";
 import BaseSubmenu from "@/components/navbar/base-submenu.vue";
 import BaseLabel from "@/components/navbar/base-label.vue";
 //data
-import pages_data from "@/data/pages.js";
 import navbar_data from "@/data/navbar.js";
+import pages_data from "@/data/pages.js";
+import features_data from "@/data/features.js";
 import apps_data from "@/data/apps.js";
 const props = defineProps({
   isSidebarOpen: Boolean,
@@ -24,6 +25,7 @@ const handleToggleSidebar = () => {
 const navbar = ref([...navbar_data]);
 const pages = ref(pages_data);
 const apps = ref(apps_data);
+const features = ref(features_data);
 
 const click = () => {
   // show.value = !show.value;
@@ -56,15 +58,12 @@ const items = computed(() => {
       label: "apps",
       items: apps.value,
     },
+    {
+      label: "features",
+      items: features.value,
+    },
   ];
 });
-
-// watch(
-//   () => navbar.value,
-//   (newValue, oldValue) => {
-//     console.log(newValue, oldValue);
-//   }
-// );
 </script>
 
 <template>
@@ -81,26 +80,56 @@ const items = computed(() => {
         </template>
         <template #main-menu-submenu>
           <BaseSubmenu
-            :class="[navbarItem.isActive ? 'menu-submenu-show' : '', '']"
+            :class="[
+              navbarItem.isActive ? 'menu-submenu-show' : '',
+              navbarItem.label === 'features' ? 'menu-content' : '',
+            ]"
           >
-            <SubmenuItem
-              v-for="item in items.find(item => item.label === navbarItem.label)
-                .items"
-              :key="item.id"
-              :isCollapsible="item.isCollapsible"
-              :label="item.label"
-            >
+            <template v-if="navbarItem.label === 'features'">
+              <ul class="menu-content">
+                <li
+                  v-for="featureItem in items.find(
+                    item => item.label === navbarItem.label
+                  ).items"
+                  :key="featureItem.id"
+                  class="menu-content-item"
+                >
+                  <h3>{{ featureItem.label }}</h3>
+                  <ul class="menu-inner">
+                    <SubmenuItem
+                      v-for="item in featureItem.items"
+                      :key="item.id"
+                      :isCollapsible="item.isCollapsible"
+                      :icon="'bullet'"
+                      :bulletType="item.bulletType"
+                      :label="item.label"
+                    >
+                    </SubmenuItem>
+                  </ul>
+                </li>
+              </ul>
+            </template>
+            <template v-else>
               <SubmenuItem
-                v-for="item in item.items"
+                v-for="item in items.find(
+                  item => item.label === navbarItem.label
+                ).items"
                 :key="item.id"
                 :isCollapsible="item.isCollapsible"
-                :icon="'bullet'"
-                :bulletType="item.bulletType"
                 :label="item.label"
-                :parentLabel="item.label"
               >
+                <SubmenuItem
+                  v-for="item in item.items"
+                  :key="item.id"
+                  :isCollapsible="item.isCollapsible"
+                  :icon="'bullet'"
+                  :bulletType="item.bulletType"
+                  :label="item.label"
+                  :parentLabel="item.label"
+                >
+                </SubmenuItem>
               </SubmenuItem>
-            </SubmenuItem>
+            </template>
           </BaseSubmenu>
         </template>
       </MainmenuItem>
@@ -114,6 +143,26 @@ const items = computed(() => {
 <style lang="scss" scoped>
 @import "@/assets/scss/navbar.scss";
 @import "@/assets/scss/custom.scss";
+
+.menu-content {
+  display: flex;
+  .menu-content-item {
+    width: 250px;
+    border-right: 1px solid #ebedf3;
+
+    h3 {
+      text-transform: capitalize;
+      padding: 30px 30px 10px 30px;
+      font-size: 14px;
+      font-weight: 500;
+      color: #181c32;
+    }
+
+    .menu-inner {
+      padding: 0 0 20px 0;
+    }
+  }
+}
 </style>
 
 <!-- <button

@@ -21,13 +21,6 @@ const props = defineProps({
   href: { type: String },
   isCollapsible: { type: Boolean },
   isLink: { type: Boolean },
-  icon: {
-    type: String,
-    validator(value) {
-      return ["svg", "bullet"].includes(value);
-    },
-    default: "svg",
-  },
   bulletType: { type: String, default: "dot" },
 });
 
@@ -51,8 +44,8 @@ const handleMouseLeave = () => {
     :href="isLink ? href : 'javascript:;'"
   >
     <template #default>
-      <BaseBulletIcon v-if="icon === 'bullet'" :bulletType="bulletType" />
-      <BaseSubmenuItemIcon v-if="icon === 'svg'">
+      <BaseBulletIcon v-if="bulletType !== 'none'" :bulletType="bulletType" />
+      <BaseSubmenuItemIcon v-if="!bulletType">
         <component :is="defaultIcon"></component>
       </BaseSubmenuItemIcon>
       <BaseSubmenuItemLabel> {{ label }} </BaseSubmenuItemLabel>
