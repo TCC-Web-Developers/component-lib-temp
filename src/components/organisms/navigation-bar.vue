@@ -100,9 +100,10 @@ const items = computed(() => {
                       v-for="item in featureItem.items"
                       :key="item.id"
                       :isCollapsible="item.isCollapsible"
-                      :icon="'bullet'"
                       :bulletType="item.bulletType"
                       :label="item.label"
+                      :hasIcon="item.hasIcon"
+                      :isBulleted="item.isBulleted"
                     >
                     </SubmenuItem>
                   </ul>
@@ -117,14 +118,17 @@ const items = computed(() => {
                 :key="item.id"
                 :isCollapsible="item.isCollapsible"
                 :label="item.label"
+                :hasIcon="item.hasIcon"
+                :isBulleted="item.isBulleted"
               >
                 <SubmenuItem
                   v-for="item in item.items"
                   :key="item.id"
                   :isCollapsible="item.isCollapsible"
-                  :icon="'bullet'"
                   :bulletType="item.bulletType"
                   :label="item.label"
+                  :hasIcon="item.hasIcon"
+                  :isBulleted="item.isBulleted"
                   :parentLabel="item.label"
                 >
                 </SubmenuItem>

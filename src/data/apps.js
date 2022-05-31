@@ -7,6 +7,8 @@ const apps = [
     bulletType: null,
     url: null,
     hasNotification: false,
+    hasIcon: true,
+    isBulleted: false,
     items: [],
   },
   {
@@ -17,6 +19,8 @@ const apps = [
     bulletType: null,
     url: null,
     hasNotification: false,
+    hasIcon: true,
+    isBulleted: false,
     items: [
       {
         id: 0,
@@ -25,6 +29,8 @@ const apps = [
         isLink: true,
         bulletType: "dot",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -34,6 +40,8 @@ const apps = [
         isLink: true,
         bulletType: "dot",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -43,6 +51,8 @@ const apps = [
         isLink: true,
         bulletType: "dot",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -52,6 +62,8 @@ const apps = [
         isLink: true,
         bulletType: "dot",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -61,6 +73,8 @@ const apps = [
         isLink: true,
         bulletType: "dot",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
     ],
@@ -73,6 +87,8 @@ const apps = [
     bulletType: null,
     url: null,
     hasNotification: false,
+    hasIcon: true,
+    isBulleted: false,
     items: [],
   },
   {
@@ -83,6 +99,8 @@ const apps = [
     bulletType: null,
     url: null,
     hasNotification: true,
+    hasIcon: true,
+    isBulleted: false,
     items: [],
   },
   {
@@ -93,6 +111,8 @@ const apps = [
     bulletType: null,
     url: null,
     hasNotification: false,
+    hasIcon: true,
+    isBulleted: false,
     items: [
       {
         id: 0,
@@ -101,6 +121,8 @@ const apps = [
         isLink: true,
         bulletType: "dash",
         hasNotification: true,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -110,6 +132,8 @@ const apps = [
         isLink: true,
         bulletType: "dash",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -119,6 +143,8 @@ const apps = [
         isLink: true,
         bulletType: "dash",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
       {
@@ -128,6 +154,8 @@ const apps = [
         isLink: true,
         bulletType: "dash",
         hasNotification: false,
+        hasIcon: false,
+        isBulleted: true,
         url: null,
       },
     ],

@@ -22,6 +22,8 @@ const props = defineProps({
   isCollapsible: { type: Boolean },
   isLink: { type: Boolean },
   bulletType: { type: String, default: "dot" },
+  hasIcon: { type: Boolean, default: false },
+  isBulleted: { type: Boolean, default: false },
 });
 
 const handleMouseOver = () => {
@@ -44,8 +46,8 @@ const handleMouseLeave = () => {
     :href="isLink ? href : 'javascript:;'"
   >
     <template #default>
-      <BaseBulletIcon v-if="bulletType !== 'none'" :bulletType="bulletType" />
-      <BaseSubmenuItemIcon v-if="!bulletType">
+      <BaseBulletIcon v-if="isBulleted" :bulletType="bulletType" />
+      <BaseSubmenuItemIcon v-if="hasIcon">
         <component :is="defaultIcon"></component>
       </BaseSubmenuItemIcon>
       <BaseSubmenuItemLabel> {{ label }} </BaseSubmenuItemLabel>
