@@ -1,7 +1,9 @@
 @import "../variables.scss";
 
-$header-height: $navbar-height;
-$header-padding-x: $padding-x;
+$header-height: var(--navbar-height);
+$header-padding-x: var(--item-padding-x);
+$header-btn-transition: var(----transition);
+$header-btn-close-color: var(--accent-color);
 
 // Header
 .sidebar-header {
@@ -15,7 +17,7 @@ $header-padding-x: $padding-x;
   outline: none;
   border: none;
   background-color: transparent;
-  transition: $transition;
+  transition: $header-btn-transition;
 
   &.menu-btn-open {
     transform: rotateY(0deg);
@@ -27,7 +29,7 @@ $header-padding-x: $padding-x;
     & > span {
       svg {
         path {
-          fill: $icon-secondary;
+          fill: $header-btn-close-color;
         }
       }
     }

@@ -1,9 +1,9 @@
 @import "../variables.scss";
 
 $sidebar-states: (
-  open: $open-sidebar-width,
-  close: $close-sidebar-width,
-  hover: $open-sidebar-width,
+  open: var(--open-sidebar-width),
+  close: var(--close-sidebar-width),
+  hover: var(--open-sidebar-width),
 );
 
 @each $key, $width in $sidebar-states {
@@ -14,8 +14,13 @@ $sidebar-states: (
     bottom: 0;
     z-index: 100;
     width: $width;
+    // background-color: var(--primary-top-gradient-color);
     background: transparent
-      linear-gradient(180deg, $bg-color-top 0%, $bg-color-bottom 100%)
+      linear-gradient(
+        180deg,
+        var(--primary-top-gradient-color) 0%,
+        var(--primary-bottom-gradient-color) 100%
+      )
       0%
       0%
       no-repeat

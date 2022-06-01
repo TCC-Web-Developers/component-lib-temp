@@ -1,5 +1,10 @@
 @import "./variables.scss";
 
+$open-sidebar-width: var(--open-sidebar-width);
+$close-sidebar-width: var(--close-sidebar-width);
+$navbar-height: var(--navbar-height);
+$wrapper-transition: var(--$transition);
+
 @mixin large-screen() {
   @media (max-width: 992px) {
     padding: $navbar-height 0 0 0;
@@ -9,8 +14,7 @@
 .wrapper {
   min-height: 100vh;
   width: 100%;
-  background-color: rgb(255, 233, 236);
-  transition: $transition;
+  transition: $wrapper-transition;
 
   &.wrapper-sidebar-open {
     padding: $navbar-height 0 0 $open-sidebar-width;

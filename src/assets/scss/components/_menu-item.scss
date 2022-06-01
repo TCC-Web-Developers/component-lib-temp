@@ -1,10 +1,31 @@
 @import "../variables.scss";
 
-// Base Color
-$base-color: $icon-primary;
-$base-opacity: 70%;
-$focus-and-active-color: $icon-secondary;
+//MENU ITEM VARIABLES
 
+// 1.) Colors
+$base-color: var(--light-color);
+$focus-and-active-color: var(--accent-color);
+$base-opacity: 70%;
+$item-hover-bg-color: var(--dark-hover-color);
+
+// 2.) Spaces
+$root-level-pl: var(--item-padding-x);
+$first-level-pl: 40px;
+$second-level-pl: 55px;
+$third-level-pl: 70px;
+
+$item-level-pl: (
+  root: $root-level-pl,
+  first: $first-level-pl,
+  second: $second-level-pl,
+  third: $third-level-pl,
+);
+
+// 3.) Font
+$font-size: var(--text-normal);
+$font-weight: var(--font-medium);
+$font-family: var(--font-family);
+//==================================================
 // Icon
 @mixin item-icon {
   pointer-events: none;
@@ -45,8 +66,8 @@ $focus-and-active-color: $icon-secondary;
   pointer-events: none;
   font-size: $font-size;
   font-weight: $font-weight;
-  color: $base-color;
   font-family: $font-family;
+  color: $base-color;
   opacity: $base-opacity;
   flex-grow: 1;
   text-transform: capitalize;
@@ -95,17 +116,16 @@ $focus-and-active-color: $icon-secondary;
   }
 }
 
-.menu-item {
-  padding: $padding-y $padding-x;
+@mixin item-property {
   text-decoration: none;
-  background-color: rgba(0, 0, 0, 0);
-  min-height: $menu-item-min-height;
   transition: $transition;
+}
 
+@mixin item-action($type) {
   &:hover,
   &[data-active="true"],
   &.active {
-    background-color: rgba(black, 10%);
+    background-color: $item-hover-bg-color;
 
     .menu-item-label,
     .menu-item-icon,
@@ -114,49 +134,26 @@ $focus-and-active-color: $icon-secondary;
     }
 
     @include iconChangeColor;
+    @if ($type == "link/submenu") {
+      @include bulletChangeColor;
+    }
   }
 }
 
-// Item level left padding
-$root-level-pl: $padding-x;
-$first-level-pl: 40px;
-$second-level-pl: 55px;
-$third-level-pl: 70px;
-
-$item-level-pl: (
-  root: $root-level-pl,
-  first: $first-level-pl,
-  second: $second-level-pl,
-  third: $third-level-pl,
-);
+.menu-item {
+  @include item-property;
+  padding: $padding-y $padding-x;
+  min-height: $menu-item-min-height;
+  @include item-action("menu");
+}
 
 // Submenu and Link Item
 .submenu-item,
 .link-item {
+  @include item-property;
   padding: 0 $padding-x;
-  text-decoration: none;
-  background-color: rgba(0, 0, 0, 0);
   min-height: $submenu-item-min-height;
-  transition: $transition;
-
-  &:hover,
-  &[data-active="true"],
-  &.active {
-    background-color: rgba(black, 10%);
-
-    .menu-item-label,
-    .menu-item-icon,
-    .menu-item-arrow {
-      opacity: 100%;
-    }
-
-    & > i {
-      color: red;
-    }
-
-    @include iconChangeColor;
-    @include bulletChangeColor;
-  }
+  @include item-action("link/submenu");
 }
 
 @each $key, $padding-left in $item-level-pl {

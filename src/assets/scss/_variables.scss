@@ -1,11 +1,14 @@
 // == COLOR ==
 
-// Primary
+// General Colors
 $primary: #fdab40;
+$accent: #005eaf;
+$light: #ffffff;
+$dark: #1e1e1e;
 // BG Gradient
-$bg-color-top: #ffc674;
-$bg-color-bottom: #f7ae46;
-// Icon
+$primary-top-gradient-color: #ffc674;
+$primary-bottom-gradient-color: #f7ae46;
+
 $icon-primary: #ffffff;
 $icon-secondary: #005eaf;
 
@@ -34,8 +37,15 @@ $padding-x: 25px;
 $padding-y: 9px;
 
 // == FONT ==
-$font-size: 13px;
-$font-weight: 500;
+$text-sm: 8px;
+$text-normal: 13px;
+$text-md: 18px;
+$text-lg: 23px;
+
+$font-light: 300;
+$font-normal: 400;
+$font-medium: 500;
+
 $font-family: "Poppins", sans-serif;
 
 // == TRANSITION ==
@@ -43,3 +53,33 @@ $transition: 0s width linear;
 
 // == BREAKPOINTS ==
 $lg: 992px;
+
+:root {
+  //colors
+  --primary-color: #{$primary};
+  --accent-color: #{$accent};
+  --light-color: #{$light};
+  --dark-color: #{$dark};
+  --dark-hover-color: #{rgba($dark, 10%)};
+  --primary-top-gradient-color: #{$primary-top-gradient-color};
+  --primary-bottom-gradient-color: #{$primary-bottom-gradient-color};
+  //sizes
+  --open-sidebar-width: #{$open-sidebar-width};
+  --close-sidebar-width: #{$close-sidebar-width};
+  --navbar-height: #{$navbar-height};
+  --navbar-width: #{$navbar-width};
+  //spaces
+  --item-padding-x: #{$padding-x};
+  --item-padding-y: #{$padding-y};
+  //fonts
+  --text-sm: #{$text-sm};
+  --text-normal: #{$text-normal};
+  --text-md: #{$text-md};
+  --text-lg: #{$text-lg};
+  --font-light: #{font-light};
+  --font-normal: #{font-normal};
+  --font-medium: #{font-medium};
+  --font-family: #{$font-family};
+  //misc
+  --transition: #{$transition};
+}
