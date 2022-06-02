@@ -1,0 +1,128 @@
+@import "../../variables.scss";
+@import "../../navbar.scss";
+
+$text-color: var(--navbar-text-color);
+$mainmenu-text-color: #6c7293;
+$icon-color: var(--navbar-icon-color);
+$active-color: var(--primary-color);
+$mainmenu-item-active-color: var(--navbar-mainmenu-item-active-color);
+$submenu-item-active-color: var(--navbar-submenu-item-active-color);
+
+@mixin menu-item-active {
+  background-color: $submenu-item-active-color;
+  .svg-icon {
+    svg {
+      path {
+        fill: $active-color;
+      }
+    }
+  }
+
+  .submenu-item-label {
+    color: $active-color;
+  }
+
+  i {
+    color: $active-color;
+  }
+}
+
+span {
+  &.menu-item-label {
+    display: block;
+    text-transform: capitalize;
+    font-size: 13px;
+    font-weight: 500;
+    color: $text-color;
+    font-family: Poppins, Helvetica, "sans-serif";
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+// Main menu
+.main-menu-item {
+  position: relative;
+  padding-right: 0.25rem;
+
+  span {
+    color: $mainmenu-text-color;
+  }
+
+  &:hover > .main-menu-item-link {
+    background-color: $mainmenu-item-active-color;
+
+    span {
+      color: $active-color;
+    }
+  }
+  &.main-menu-item-active > .main-menu-item-link {
+    background-color: $mainmenu-item-active-color;
+
+    span {
+      color: $active-color;
+    }
+  }
+
+  .main-menu-item-link {
+    border-radius: 4px;
+    padding: 8px 14px;
+  }
+}
+
+// Submenu
+.menu-item {
+  position: relative;
+  .menu-link {
+    display: block;
+    width: 100%;
+    padding: 11px 30px;
+
+    .svg-icon {
+      height: 23px;
+      width: 23px;
+      flex: 0 0 33px;
+      svg {
+        height: 19.5px;
+        width: 19.5px;
+
+        path {
+          fill: $icon-color;
+        }
+      }
+    }
+
+    .submenu-item-label {
+      flex-grow: 1;
+      font-weight: 400;
+    }
+
+    i {
+      width: 0;
+      font-size: 1.2rem;
+      flex: 0 0 24px;
+      margin-left: -6px;
+      color: $icon-color;
+      &::before {
+        display: flex;
+        justify-content: flex-start;
+      }
+    }
+
+    .arrow-icon {
+      font-size: 0.75rem;
+      margin-left: 0px;
+      &::before {
+        display: flex;
+        justify-content: flex-end;
+      }
+    }
+
+    &:hover {
+      @include menu-item-active;
+    }
+  }
+
+  &.menu-item-active {
+    @include menu-item-active;
+  }
+}

@@ -61,6 +61,10 @@ $lg: 992px;
   --light-color: #{$light};
   --dark-color: #{$dark};
   --dark-hover-color: #{rgba($dark, 10%)};
+  --navbar-text-color: #3f4254;
+  --navbar-icon-color: #b5b5c3;
+  --navbar-mainmenu-item-active-color: rgba(77, 89, 149, 0.06);
+  --navbar-submenu-item-active-color: #f3f6f9;
   --primary-top-gradient-color: #{$primary-top-gradient-color};
   --primary-bottom-gradient-color: #{$primary-bottom-gradient-color};
   //sizes

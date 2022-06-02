@@ -8,7 +8,3 @@ import BaseLabel from "@/components/navbar/base-label.vue";
     <slot></slot>
   </BaseLabel>
 </template>
-
-<style lang="scss" scoped>
-@import "@/assets/scss/navbar.scss";
-</style>

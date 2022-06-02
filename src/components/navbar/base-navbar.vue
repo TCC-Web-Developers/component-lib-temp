@@ -36,9 +36,4 @@ const props = defineProps({
 <style lang="scss" scoped>
 @import "@/assets/scss/navbar.scss";
 @import "@/assets/scss/custom.scss";
-
-.menu {
-  background-color: coral;
-  color: white;
-}
 </style>

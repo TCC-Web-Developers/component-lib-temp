@@ -7,7 +7,7 @@ import BaseSubmenuItemLabel from "@/components/navbar/base-submenu-item-label.vu
 import BaseSubmenuItemArrow from "@/components/navbar/base-submenu-item-arrow.vue";
 import BaseBulletIcon from "@/components/navbar/base-bullet-icon.vue";
 //ICONS
-import IconBootstrap from "@/components/icons/icon-bootstrap.vue";
+import IconDefault from "@/components/icons/navbar/icon-briefcase.vue";
 import IconBriefcase from "@/components/icons/navbar/icon-briefcase.vue";
 import IconChatLocked from "@/components/icons/navbar/icon-chat-locked.vue";
 import IconCmd from "@/components/icons/navbar/icon-cmd.vue";
@@ -28,6 +28,10 @@ import IconThumbtack from "@/components/icons/navbar/icon-thumbtack.vue";
 // import BaseSubmenuItemLabel from "../../navbar/base-submenu-item-label.vue";
 // import BaseSubmenuItemArrow from "../../navbar/base-submenu-item-arrow.vue";
 const icons = shallowRef([
+  {
+    name: "default",
+    component: IconDefault,
+  },
   {
     name: "briefcase",
     component: IconBriefcase,
@@ -85,7 +89,6 @@ const icons = shallowRef([
     component: IconThumbtack,
   },
 ]);
-const defaultIcon = shallowRef(IconBootstrap);
 const activeItem = ref(null);
 const props = defineProps({
   label: { type: String, default: "Label" },
@@ -107,10 +110,6 @@ const handleMouseLeave = () => {
   activeItem.value = null;
 };
 
-// const getItemIcon = () => {
-//   return icons.value.find(icon => icon.name === props.label).component;
-// };
-
 const getIcon = iconName => {
   return icons.value.find(icon => icon.name === iconName).component;
 };
@@ -125,10 +124,10 @@ const getIcon = iconName => {
     <template #default>
       <BaseBulletIcon v-if="isBulleted" :bulletType="bulletType" />
       <BaseSubmenuItemIcon v-if="hasIcon">
-        <component :is="getIcon(icon)"></component>
+        <component :is="getIcon(icon ? icon : 'default')"></component>
       </BaseSubmenuItemIcon>
       <BaseSubmenuItemLabel>
-        {{ label + ` ${hasIcon ? "hasicon" : "no"}` }}
+        {{ label }}
       </BaseSubmenuItemLabel>
       <BaseSubmenuItemArrow v-if="isCollapsible" />
     </template>
@@ -144,4 +143,6 @@ const getIcon = iconName => {
   </BaseSubmenuItem>
 </template>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+@import "@/assets/scss/components/navbar/menu-item.scss";
+</style>

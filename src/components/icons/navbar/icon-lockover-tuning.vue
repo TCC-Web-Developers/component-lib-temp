@@ -23,6 +23,5 @@
 </template>
 
 <style lang="scss" scoped>
-@import "@/assets/scss/components/menu-item.scss";
-@import "@/assets/scss/navbar.scss";
+@import "@/assets/scss/components/navbar/menu-item.scss";
 </style>
