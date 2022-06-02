@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, shallowRef, watch, onMounted } from "vue";
+import { ref, computed, shallowRef, watch } from "vue";
 import { useRouter } from "vue-router";
 import BaseMenuItem from "@/components/sidebar/base-menu-item.vue";
 import BaseMenuItemLabel from "@/components/sidebar/base-menu-item-label.vue";
@@ -27,8 +27,6 @@ import IconCalendar from "@/components/icons/icon-calendar.vue";
 import IconCharts from "@/components/icons/icon-charts.vue";
 import IconMaps from "@/components/icons/icon-maps.vue";
 import IconMiscellaneous from "@/components/icons/icon-miscellaneous.vue";
-//LOGIC
-import Collapse from "@/utils/Collapse.js";
 
 const icons = shallowRef([
   {
@@ -113,8 +111,9 @@ const icons = shallowRef([
   },
 ]);
 const router = useRouter();
-const itemsRef = ref(null);
-const heightRef = ref([]);
+const currentRouteRef = ref(null);
+const submenuHeight = ref(0);
+const isActive = ref(false);
 const props = defineProps({
   isSidebarOpen: Boolean,
   isSidebarHovering: Boolean,
@@ -133,77 +132,66 @@ const props = defineProps({
   isCollapsible: { type: Boolean, default: false },
   isLink: { type: Boolean, default: false },
   parentTag: String,
-  activeItems: Object,
+  activeItems: { type: Array },
 });
 const emits = defineEmits(["handleToggleItem"]);
 
 const handleToggleItem = () => {
+  if (!props.isCollapsible) return;
   const itemData = {
     itemType: props.type,
     level: props.itemLevel,
+    label: props.label,
     parent: props.parentTag,
     id: props.id,
+    itemsLength: props.itemsLength,
+    submenuHeight: props.itemsLength * 40,
   };
   emits("handleToggleItem", itemData);
-  // if (!props.isCollapsible) return;
-  // const submenu = new Collapse(itemsRef.value, 40, props.itemsLength);
-  // submenu.activate();
 };
+
+watch(
+  () => props.activeItems,
+  newValue => {
+    submenuHeight.value = 0;
+    isActive.value = false;
+
+    newValue.forEach(activeItem => {
+      const { parent, id, submenuHeight: activeSubemenuHeight } = activeItem;
+      if (parent === props.parentTag && id === props.id) {
+        submenuHeight.value = activeSubemenuHeight;
+        isActive.value = !isActive.value;
+      }
+    });
+  }
+);
 
 const currentRoute = computed(() => {
   return router.currentRoute.value.fullPath;
 });
 
-// const rootSubmenuHeight = computed(() => {
-//   return
-// })
-
 watch(
-  () => props.activeItems,
-  (newValue, oldValue) => {
-    const { activeRootItem } = newValue;
-    if (props.itemLevel === "root") {
-      const { id } = activeRootItem;
-      if (props.id === id) {
-        if (heightRef.value > 0) {
-          heightRef.value = 0;
-          return;
-        }
-        heightRef.value = 40 * props.itemsLength;
-      } else {
-        heightRef.value = 0;
-      }
+  () => currentRoute.value,
+  newValue => {
+    if (props.href === newValue) {
+      console.log(props.parentTag);
     }
-    if (props.itemLevel === "first") {
-      console.log("firsttt");
-    }
-    // const { activeRootItem } = newValue;
-    // // console.log("ACTIVE ROO", activeRootItem);
-    // if (props.itemLevel === "root") {
-    //   const { id } = activeRootItem;
-    //   if (heightRef.value > 0) {
-    //     heightRef.value = 0;
-    //     return;
-    //   }
-    //   heightRef.value = props.id === id ? 40 * props.itemsLength : 0;
-    // }
-  },
-  { deep: true }
+  }
 );
 </script>
 
 <template>
   <BaseMenuItem
+    ref="currentRouteRef"
     @handleToggleItem="handleToggleItem"
     v-show="(isSidebarOpen || isSidebarHovering) | (itemLevel === 'root')"
     :href="isLink ? href : 'javascript:;'"
     :type="type"
     :itemLevel="itemLevel"
-    :currentRoute="currentRoute"
-    ref="anchorRef"
+    :isActive="isActive"
+    v-memo="[activeItems]"
   >
     <template #menu-item>
-      <!-- {{ childrenLinks.includes(currentRoute) ? "active" : "hidden" }} -->
       <BaseMenuItemIcon
         v-if="type === 'menu-item' || (isLink && itemLevel === 'root')"
       >
@@ -226,14 +214,9 @@ watch(
     </template>
     <template v-if="isCollapsible" #submenu>
       <ul
-        ref="itemsRef"
         class="submenu"
         :class="[`${itemLevel}-submenu`]"
-        data-status="hidden"
-        :data-level="itemLevel"
-        :data-label="label"
-        :data-tag="parentTag"
-        :style="{ maxHeight: `${heightRef}px` }"
+        :style="{ maxHeight: `${submenuHeight}px` }"
       >
         <slot></slot>
       </ul>
@@ -245,7 +228,7 @@ watch(
 @import "@/assets/scss/components/menu-item.scss";
 
 .submenu {
-  transition: 0.3s max-height linear;
+  transition: 0.4s max-height linear;
   list-style: none;
   padding: 0;
 

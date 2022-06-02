@@ -1,17 +1,24 @@
 <script setup>
+import { computed } from "vue";
 import BaseLink from "@/components/global/base-link.vue";
-//menu types => item, section
+import { useRouter } from "vue-router";
+const router = useRouter();
 const props = defineProps({
   href: String,
   type: String,
   itemLevel: String,
-  currentRoute: String,
+  isActive: Boolean,
+  isRouteActive: Boolean,
 });
 const emit = defineEmits(["handleToggleItem"]);
 
 const handleToggleItem = () => {
   emit("handleToggleItem");
 };
+
+const currentRoute = computed(() => {
+  return router.currentRoute.value.fullPath;
+});
 </script>
 
 <template>
@@ -20,10 +27,10 @@ const handleToggleItem = () => {
       @click="handleToggleItem"
       :href="href"
       class="d-flex align-items-center"
-      data-active="false"
       :class="[
         `${type}`,
         `${itemLevel}-level-item`,
+        isActive ? 'active' : '',
         currentRoute === href ? 'active' : '',
       ]"
     >

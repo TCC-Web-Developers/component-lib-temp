@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, watch, reactive } from "vue";
+import { ref, reactive } from "vue";
 import { useRouter } from "vue-router";
 //COMPONENTS
 import HeaderSidebar from "@/components/molecules/header-sidebar.vue";
@@ -39,7 +39,7 @@ const handleMouseLeave = () => {
 };
 
 const handleToggleItem = itemData => {
-  const { level, id, parent, submenuHeight } = itemData;
+  const { level, id, parent } = itemData;
   const hasItemInActiveItemsContainer = activeItemsContainer.items.some(
     activeItem => activeItem.id === id && activeItem.parent === parent
   );
@@ -50,26 +50,7 @@ const handleToggleItem = itemData => {
       activeItem => activeItem.parent !== parent
     );
 
-    //shrink
-    activeItemsContainer.items = activeItemsContainer.items.map(activeItem => {
-      //shrink root
-      if (activeItem.level === "root" && level === "second") {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.submenuHeight - submenuHeight,
-        };
-      }
-      //shrink parent
-      if (activeItem.label === parent) {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.submenuHeight - submenuHeight,
-        };
-      }
-      return activeItem;
-    });
-
-    console.log("remove item on a list", activeItemsContainer.items);
+    console.log("remove item on a list");
     return;
   }
 
@@ -80,100 +61,42 @@ const handleToggleItem = itemData => {
 
   //Append clicked item in active items container based on their dropdown level
   if (level === "root") {
-    let item = itemData;
     const copy = [...activeItemsContainer.items];
-
-    //when root item is close and some of its subitems are open.
-    if (activeItemsContainer.items.length) {
-      copy.forEach(firstItem => {
-        if (
-          firstItem.level === "first" &&
-          firstItem.parent === itemData.label
-        ) {
-          copy.forEach(secondItem => {
-            if (
-              secondItem.level === "first" &&
-              secondItem.parent === firstItem.label
-            ) {
-              item = {
-                ...itemData,
-                submenuHeight:
-                  itemData.itemsLength * 40 +
-                  firstItem.submenuHeight +
-                  secondItem.submenuHeight,
-              };
-            }
-          });
-          item = {
-            ...itemData,
-            submenuHeight: itemData.itemsLength * 40 + firstItem.submenuHeight,
-          };
-        }
-      });
-    }
-
-    activeItemsContainer.items = [...copy, item];
+    activeItemsContainer.items = [...copy, itemData];
   } else if (level === "first") {
-    let item = itemData;
-    let copy = [...activeItemsContainer.items].map(activeItem => {
-      if (activeItem.label === itemData.parent) {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
-        };
-      }
-      return activeItem;
-    });
-    console.log("height with open first", copy);
-    console.log("first with open");
-
-    if (
-      copy.some(activeItem => activeItem.level === "root") &&
-      copy.some(activeItem => activeItem.level === "second") &&
-      copy.some(activeItem => activeItem.parent === item.label)
-    ) {
-      //expand root's submenu height
-      const secondActiveItemHeight = copy.find(
-        activeItem => activeItem.level === "second"
-      ).submenuHeight;
-      copy = copy.map(activeItem => {
-        if (activeItem.level === "root") {
-          return {
-            ...activeItem,
-            submenuHeight: activeItem.submenuHeight + secondActiveItemHeight,
-          };
-        }
-        return activeItem;
-      });
-      //expand first's submenu height
-      item = {
-        ...item,
-        submenuHeight: itemData.itemsLength * 40 + secondActiveItemHeight,
-      };
-    }
-
-    activeItemsContainer.items = [...copy, item];
-  } else if (level === "second") {
     const copy = [...activeItemsContainer.items].map(activeItem => {
-      //parent only
       if (activeItem.label === itemData.parent) {
         return {
           ...activeItem,
           submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
         };
       }
-
-      if (activeItem.level === "root") {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.submenuHeight + itemData.submenuHeight,
-        };
-      }
-
       return activeItem;
     });
     activeItemsContainer.items = [...copy, itemData];
   }
+
+  // else if (level === "second") {
+  //   const copy = [...activeItemsContainer.items].map(activeItem => {
+  //     //parent only
+  //     if (activeItem.label === itemData.parent) {
+  //       return {
+  //         ...activeItem,
+  //         submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
+  //       };
+  //     }
+
+  //     if (activeItem.level === "root") {
+  //       return {
+  //         ...activeItem,
+  //         submenuHeight:
+  //           activeItem.itemsLength * 40 + itemData.submenuHeight,
+  //       };
+  //     }
+  //     return activeItem;
+  //   });
+  //   activeItemsContainer.items = [...copy, itemData];
+  // }
 };
 
 defineExpose({
@@ -259,7 +182,6 @@ defineExpose({
                 :isSidebarHovering="isSidebarHovering"
                 v-for="secondItem in firstItem.items"
                 :key="secondItem.id"
-                :id="secondItem.id"
                 :itemsLength="secondItem.items.length"
                 :label="secondItem.label"
                 :type="secondItem.type"
@@ -273,12 +195,10 @@ defineExpose({
               >
                 <!-- THIRD LEVEL SUBMENU ITEMS   -->
                 <MenuItemSidebar
-                  @handleToggleItem="handleToggleItem"
                   :isSidebarOpen="isSidebarOpen"
                   :isSidebarHovering="isSidebarHovering"
                   v-for="thirdItem in secondItem.items"
                   :key="thirdItem.id"
-                  :id="thirdItem.id"
                   :itemsLength="thirdItem.items.length"
                   :label="thirdItem.label"
                   :type="thirdItem.type"
@@ -288,7 +208,6 @@ defineExpose({
                   :parentTag="secondItem.label"
                   :isLink="thirdItem.isLink"
                   :itemLevel="'third'"
-                  :activeItems="activeItemsContainer.items"
                 >
                 </MenuItemSidebar>
                 <!-- THIRD LEVEL SUBMENU ITEMS   -->
