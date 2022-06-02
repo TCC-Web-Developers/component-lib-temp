@@ -11,6 +11,7 @@ const features = [
         isLink: true,
         hasIcon: true,
         isBulleted: false,
+        icon: "briefcase",
         url: null,
       },
       {
@@ -21,6 +22,7 @@ const features = [
         isLink: true,
         hasIcon: true,
         isBulleted: false,
+        icon: "crown",
         url: null,
       },
       {
@@ -31,6 +33,7 @@ const features = [
         isLink: true,
         hasIcon: true,
         isBulleted: false,
+        icon: "lockover-tuning",
         url: null,
       },
       {
@@ -41,6 +44,7 @@ const features = [
         isLink: true,
         hasIcon: true,
         isBulleted: false,
+        icon: "thumbtack",
         url: null,
       },
       {
@@ -51,6 +55,7 @@ const features = [
         isLink: true,
         hasIcon: true,
         isBulleted: false,
+        icon: "outgoing-box",
         url: null,
       },
     ],
@@ -67,6 +72,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -77,6 +83,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -87,6 +94,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -97,6 +105,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -107,6 +116,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -117,6 +127,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
     ],
@@ -133,6 +144,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -143,6 +155,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -153,6 +166,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -163,6 +177,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -173,6 +188,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -183,6 +199,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
     ],
@@ -199,6 +216,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
       {
@@ -209,6 +227,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
       {
@@ -219,6 +238,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
       {
@@ -229,6 +249,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
       {
@@ -239,6 +260,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
       {
@@ -249,6 +271,7 @@ const features = [
         isLink: true,
         hasIcon: false,
         isBulleted: false,
+        icon: null,
         url: null,
       },
     ],

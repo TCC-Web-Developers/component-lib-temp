@@ -5,14 +5,86 @@ import BaseSubmenuItem from "@/components/navbar/base-submenu-item.vue";
 import BaseSubmenuItemIcon from "@/components/navbar/base-submenu-item-icon.vue";
 import BaseSubmenuItemLabel from "@/components/navbar/base-submenu-item-label.vue";
 import BaseSubmenuItemArrow from "@/components/navbar/base-submenu-item-arrow.vue";
-import IconBootstrap from "@/components/icons/icon-bootstrap.vue";
 import BaseBulletIcon from "@/components/navbar/base-bullet-icon.vue";
+//ICONS
+import IconBootstrap from "@/components/icons/icon-bootstrap.vue";
+import IconBriefcase from "@/components/icons/navbar/icon-briefcase.vue";
+import IconChatLocked from "@/components/icons/navbar/icon-chat-locked.vue";
+import IconCmd from "@/components/icons/navbar/icon-cmd.vue";
+import IconCompiling from "@/components/icons/navbar/icon-compiling.vue";
+import IconCrown from "@/components/icons/navbar/icon-crown.vue";
+import IconGroupChat from "@/components/icons/navbar/icon-group-chat.vue";
+import IconLockoverTuning from "@/components/icons/navbar/icon-lockover-tuning.vue";
+import IconMailAt from "@/components/icons/navbar/icon-mail-at.vue";
+import IconMailbox from "@/components/icons/navbar/icon-mailbox.vue";
+import IconOutgoingBox from "@/components/icons/navbar/icon-outgoing-box.vue";
+import IconSafeChat from "@/components/icons/navbar/icon-safe-chat.vue";
+import IconSend from "@/components/icons/navbar/icon-send.vue";
+import IconSpam from "@/components/icons/navbar/icon-spam.vue";
+import IconThumbtack from "@/components/icons/navbar/icon-thumbtack.vue";
 //TEMPORARILY IMPORT FOR STORYBOOK
 // import BaseSubmenuItem from "../../navbar/base-submenu-item.vue";
 // import BaseSubmenuItemIcon from "../../navbar/base-submenu-item-icon.vue";
 // import BaseSubmenuItemLabel from "../../navbar/base-submenu-item-label.vue";
 // import BaseSubmenuItemArrow from "../../navbar/base-submenu-item-arrow.vue";
-const icons = ref([]);
+const icons = shallowRef([
+  {
+    name: "briefcase",
+    component: IconBriefcase,
+  },
+  {
+    name: "chat-locked",
+    component: IconChatLocked,
+  },
+  {
+    name: "cmd",
+    component: IconCmd,
+  },
+  {
+    name: "compiling",
+    component: IconCompiling,
+  },
+  {
+    name: "crown",
+    component: IconCrown,
+  },
+  {
+    name: "group-chat",
+    component: IconGroupChat,
+  },
+  {
+    name: "lockover-tuning",
+    component: IconLockoverTuning,
+  },
+  {
+    name: "mail-at",
+    component: IconMailAt,
+  },
+  {
+    name: "mailbox",
+    component: IconMailbox,
+  },
+  {
+    name: "outgoing-box",
+    component: IconOutgoingBox,
+  },
+  {
+    name: "safe-chat",
+    component: IconSafeChat,
+  },
+  {
+    name: "send",
+    component: IconSend,
+  },
+  {
+    name: "spam",
+    component: IconSpam,
+  },
+  {
+    name: "thumbtack",
+    component: IconThumbtack,
+  },
+]);
 const defaultIcon = shallowRef(IconBootstrap);
 const activeItem = ref(null);
 const props = defineProps({
@@ -24,6 +96,7 @@ const props = defineProps({
   bulletType: { type: String, default: "dot" },
   hasIcon: { type: Boolean, default: false },
   isBulleted: { type: Boolean, default: false },
+  icon: { type: String, default: null },
 });
 
 const handleMouseOver = () => {
@@ -37,6 +110,10 @@ const handleMouseLeave = () => {
 // const getItemIcon = () => {
 //   return icons.value.find(icon => icon.name === props.label).component;
 // };
+
+const getIcon = iconName => {
+  return icons.value.find(icon => icon.name === iconName).component;
+};
 </script>
 
 <template>
@@ -48,9 +125,11 @@ const handleMouseLeave = () => {
     <template #default>
       <BaseBulletIcon v-if="isBulleted" :bulletType="bulletType" />
       <BaseSubmenuItemIcon v-if="hasIcon">
-        <component :is="defaultIcon"></component>
+        <component :is="getIcon(icon)"></component>
       </BaseSubmenuItemIcon>
-      <BaseSubmenuItemLabel> {{ label }} </BaseSubmenuItemLabel>
+      <BaseSubmenuItemLabel>
+        {{ label + ` ${hasIcon ? "hasicon" : "no"}` }}
+      </BaseSubmenuItemLabel>
       <BaseSubmenuItemArrow v-if="isCollapsible" />
     </template>
     <template #subnav>

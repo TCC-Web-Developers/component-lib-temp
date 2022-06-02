@@ -1,4 +1,5 @@
 @import "../variables.scss";
+@import "../svg-icon";
 
 //MENU ITEM VARIABLES
 
@@ -35,15 +36,9 @@ $font-family: var(--font-family);
 .menu-item-icon {
   @include item-icon;
   flex: 0 0 35px;
-
+  @include svg-icon;
   svg {
-    height: $icon-size;
-    width: $icon-size;
     margin-left: -2px;
-
-    path {
-      transition: 0.16s fill linear;
-    }
   }
 }
 
@@ -102,11 +97,7 @@ $font-family: var(--font-family);
 // Menu Item
 @mixin iconChangeColor {
   .menu-item-icon {
-    svg {
-      path {
-        fill: $focus-and-active-color;
-      }
-    }
+    @include sidebar-svg-icon-hover;
   }
 }
 

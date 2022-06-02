@@ -104,6 +104,7 @@ const items = computed(() => {
                       :label="item.label"
                       :hasIcon="item.hasIcon"
                       :isBulleted="item.isBulleted"
+                      :icon="item.icon"
                     >
                     </SubmenuItem>
                   </ul>
@@ -120,6 +121,7 @@ const items = computed(() => {
                 :label="item.label"
                 :hasIcon="item.hasIcon"
                 :isBulleted="item.isBulleted"
+                :icon="item.icon"
               >
                 <SubmenuItem
                   v-for="item in item.items"
@@ -130,6 +132,7 @@ const items = computed(() => {
                   :hasIcon="item.hasIcon"
                   :isBulleted="item.isBulleted"
                   :parentLabel="item.label"
+                  :icon="item.icon"
                 >
                 </SubmenuItem>
               </SubmenuItem>

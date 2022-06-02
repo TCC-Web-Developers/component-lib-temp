@@ -170,14 +170,12 @@ const currentRoute = computed(() => {
   return router.currentRoute.value.fullPath;
 });
 
-watch(
-  () => currentRoute.value,
-  newValue => {
-    if (props.href === newValue) {
-      console.log(props.parentTag);
-    }
-  }
-);
+// watch(
+//   () => currentRoute.value,
+//   newValue => {
+//     currentRouteParent.value = props.parentTag;
+//   }
+// );
 </script>
 
 <template>

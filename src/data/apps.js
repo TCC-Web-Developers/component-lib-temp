@@ -9,6 +9,7 @@ const apps = [
     hasNotification: false,
     hasIcon: true,
     isBulleted: false,
+    icon: "safe-chat",
     items: [],
   },
   {
@@ -21,6 +22,7 @@ const apps = [
     hasNotification: false,
     hasIcon: true,
     isBulleted: false,
+    icon: "send",
     items: [
       {
         id: 0,
@@ -31,6 +33,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -42,6 +45,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -53,6 +57,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -64,6 +69,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -75,6 +81,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
     ],
@@ -89,6 +96,7 @@ const apps = [
     hasNotification: false,
     hasIcon: true,
     isBulleted: false,
+    icon: "mail-at",
     items: [],
   },
   {
@@ -101,6 +109,7 @@ const apps = [
     hasNotification: true,
     hasIcon: true,
     isBulleted: false,
+    icon: "chat-locked",
     items: [],
   },
   {
@@ -113,6 +122,7 @@ const apps = [
     hasNotification: false,
     hasIcon: true,
     isBulleted: false,
+    icon: "group-chat",
     items: [
       {
         id: 0,
@@ -123,6 +133,7 @@ const apps = [
         hasNotification: true,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -134,6 +145,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -145,6 +157,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
       {
@@ -156,6 +169,7 @@ const apps = [
         hasNotification: false,
         hasIcon: false,
         isBulleted: true,
+        icon: null,
         url: null,
       },
     ],
