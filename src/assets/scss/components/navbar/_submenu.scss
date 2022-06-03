@@ -1,7 +1,9 @@
 @import "../../variables.scss";
 @import "../../navbar.scss";
+@import "../../keyframes.scss";
 
 $submenu-bg-color: var(--light-color);
+$submenu-dropright: var(--submenu-dropright-animation);
 
 .menu-submenu {
   display: none;
@@ -19,7 +21,7 @@ $submenu-bg-color: var(--light-color);
   border-radius: 4px;
   -webkit-box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
   box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
-  animation: submenuIn 0.2s ease-out forwards;
+  animation: dropdown 0.2s ease-out forwards;
 
   &.menu-content {
     padding: 0px 0px;
@@ -30,14 +32,7 @@ $submenu-bg-color: var(--light-color);
     display: block;
   }
 
-  @keyframes submenuIn {
-    from {
-      top: 110%;
-    }
-    to {
-      top: 100%;
-    }
-  }
+  @include submenu-collapse-keyframe("down");
 
   .subitem-subnav {
     display: hidden;
@@ -45,21 +40,12 @@ $submenu-bg-color: var(--light-color);
     margin-left: 2px;
     opacity: 0;
     left: 100%;
-    animation: subnavIn 0.15s ease-out forwards;
+    animation: dropright 0.15s ease-out forwards;
 
     &.subitem-subnav-show {
       display: block;
     }
 
-    @keyframes subnavIn {
-      from {
-        top: -110%;
-        opacity: 0;
-      }
-      to {
-        top: 0%;
-        opacity: 1;
-      }
-    }
+    @include submenu-collapse-keyframe("right");
   }
 }

@@ -26,7 +26,7 @@ $item-level-pl: (
 $font-size: var(--text-normal);
 $font-weight: var(--font-medium);
 $font-family: var(--font-family);
-//==================================================
+
 // Icon
 @mixin item-icon {
   pointer-events: none;
@@ -88,8 +88,14 @@ $font-family: var(--font-family);
   i {
     height: max-content;
     width: max-content;
+    transition: 0.2s all linear;
+
     &::before {
       transform-origin: center;
+    }
+
+    &.active {
+      transform: rotate(90deg);
     }
   }
 }

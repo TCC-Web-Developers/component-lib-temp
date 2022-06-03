@@ -1,0 +1,25 @@
+@mixin submenu-collapse-keyframe($direction) {
+  @if ($direction == "right") {
+    @keyframes dropright {
+      from {
+        top: -110%;
+        opacity: 0;
+      }
+      to {
+        top: 0%;
+        opacity: 1;
+      }
+    }
+  }
+
+  @if ($direction == "down") {
+    @keyframes dropdown {
+      from {
+        top: 110%;
+      }
+      to {
+        top: 100%;
+      }
+    }
+  }
+}

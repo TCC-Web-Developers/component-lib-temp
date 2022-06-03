@@ -86,4 +86,5 @@ $lg: 992px;
   --font-family: #{$font-family};
   //misc
   --transition: #{$transition};
+  --submenu-dropright-animation: dropright 0.15s ease-out forwards;
 }
