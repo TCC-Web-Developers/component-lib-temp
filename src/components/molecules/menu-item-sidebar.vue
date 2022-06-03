@@ -119,6 +119,7 @@ const props = defineProps({
   isSidebarHovering: Boolean,
   id: Number,
   href: String,
+  path: String,
   itemsLength: Number,
   label: String,
   type: {
@@ -173,7 +174,36 @@ const currentRoute = computed(() => {
 // watch(
 //   () => currentRoute.value,
 //   newValue => {
-//     currentRouteParent.value = props.parentTag;
+//     if (props.itemLevel === "root") {
+//       const arr = newValue.split("/").splice(2);
+
+//       if (props.path && arr[0] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//     }
+//     if (props.itemLevel === "first") {
+//       const arr = newValue.split("/").splice(2);
+
+//       if (props.path && arr[0] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//       if (props.path && arr[1] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//     }
+//     if (props.itemLevel === "second") {
+//       const arr = newValue.split("/").splice(2);
+
+//       if (props.path && arr[0] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//       if (props.path && arr[1] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//       if (props.path && arr[2] === props.path.replace("/", "")) {
+//         handleToggleItem();
+//       }
+//     }
 //   }
 // );
 </script>
@@ -208,7 +238,7 @@ const currentRoute = computed(() => {
       <BaseMenuItemLabel v-if="isSidebarOpen || isSidebarHovering">
         {{ label }}
       </BaseMenuItemLabel>
-      <BaseMenuItemArrow v-if="!isLink" />
+      <BaseMenuItemArrow v-if="!isLink" :isActive="isActive" />
     </template>
     <template v-if="isCollapsible" #submenu>
       <ul
@@ -226,7 +256,7 @@ const currentRoute = computed(() => {
 @import "@/assets/scss/components/menu-item.scss";
 
 .submenu {
-  transition: 0.4s max-height linear;
+  transition: 0.18s max-height linear;
   list-style: none;
   padding: 0;
 

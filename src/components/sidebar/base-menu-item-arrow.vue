@@ -1,8 +1,12 @@
-<script setup></script>
+<script setup>
+const props = defineProps({
+  isActive: Boolean,
+});
+</script>
 
 <template>
   <span class="menu-item-arrow d-flex justify-content-end">
-    <i class="bi bi-chevron-right"></i>
+    <i class="bi bi-chevron-right" :class="[isActive ? 'active' : '']"></i>
   </span>
 </template>
 

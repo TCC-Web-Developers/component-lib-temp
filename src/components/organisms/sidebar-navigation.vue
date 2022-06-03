@@ -8,7 +8,7 @@ import BaseMenuSection from "@/components/sidebar/base-menu-section.vue";
 import MenuSectionHeaderSidebar from "@/components/molecules/menu-section-header-sidebar.vue";
 import BaseSidebar from "@/components/sidebar/base-sidebar.vue";
 //DATA
-import menusObject from "@/data/menus.js";
+import menusObject from "@/data/sidebar/menus.js";
 
 const props = defineProps({
   isOffCanvasOpen: Boolean,
@@ -38,52 +38,70 @@ const handleMouseLeave = () => {
   }
 };
 
+const removeItem = itemData => {
+  const { level, parent, submenuHeight } = itemData;
+
+  activeItemsContainer.items = [...activeItemsContainer.items].filter(
+    activeItem => activeItem.parent !== parent
+  );
+
+  //shrink the height of removed item's parent(submenu) and its root item.
+  activeItemsContainer.items = activeItemsContainer.items.map(activeItem => {
+    //shrink root
+    if (activeItem.level === "root" && level === "second") {
+      return {
+        ...activeItem,
+        submenuHeight: activeItem.submenuHeight - submenuHeight,
+      };
+    }
+    //shrink parent
+    if (activeItem.label === parent) {
+      return {
+        ...activeItem,
+        submenuHeight: activeItem.submenuHeight - submenuHeight,
+      };
+    }
+    return activeItem;
+  });
+};
+
+const toggleSubItem = parent => {
+  activeItemsContainer.items = [...activeItemsContainer.items].filter(
+    activeItem => activeItem.parent !== parent
+  );
+};
+
+const toggleRootItem = level => {
+  activeItemsContainer.items = [...activeItemsContainer.items].filter(
+    activeItem => activeItem.level !== level
+  );
+};
+
 const handleToggleItem = itemData => {
-  const { level, id, parent, submenuHeight } = itemData;
+  const { level, id, parent } = itemData;
   const hasItemInActiveItemsContainer = activeItemsContainer.items.some(
     activeItem => activeItem.id === id && activeItem.parent === parent
   );
 
   //check if it has already item in active items container, then remove it.
   if (hasItemInActiveItemsContainer) {
-    activeItemsContainer.items = [...activeItemsContainer.items].filter(
-      activeItem => activeItem.parent !== parent
-    );
-
-    //shrink
-    activeItemsContainer.items = activeItemsContainer.items.map(activeItem => {
-      //shrink root
-      if (activeItem.level === "root" && level === "second") {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.submenuHeight - submenuHeight,
-        };
-      }
-      //shrink parent
-      if (activeItem.label === parent) {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.submenuHeight - submenuHeight,
-        };
-      }
-      return activeItem;
-    });
-
-    console.log("remove item on a list", activeItemsContainer.items);
+    removeItem(itemData);
     return;
   }
 
-  //toggle item in active items container based on its parent item. Root item's parent ==> "main"
-  activeItemsContainer.items = [...activeItemsContainer.items].filter(
-    activeItem => activeItem.parent !== parent
-  );
+  //toggle similar level item.
+  if (level === "root") {
+    toggleRootItem(level);
+  } else {
+    toggleSubItem(parent);
+  }
 
   //Append clicked item in active items container based on their dropdown level
   if (level === "root") {
-    let item = itemData;
+    let itemDataCopy = itemData;
     const copy = [...activeItemsContainer.items];
 
-    //when root item is close and some of its subitems are open.
+    //to retain submenu's height of root upon opening
     if (activeItemsContainer.items.length) {
       copy.forEach(firstItem => {
         if (
@@ -95,7 +113,7 @@ const handleToggleItem = itemData => {
               secondItem.level === "first" &&
               secondItem.parent === firstItem.label
             ) {
-              item = {
+              itemDataCopy = {
                 ...itemData,
                 submenuHeight:
                   itemData.itemsLength * 40 +
@@ -104,7 +122,7 @@ const handleToggleItem = itemData => {
               };
             }
           });
-          item = {
+          itemDataCopy = {
             ...itemData,
             submenuHeight: itemData.itemsLength * 40 + firstItem.submenuHeight,
           };
@@ -112,9 +130,9 @@ const handleToggleItem = itemData => {
       });
     }
 
-    activeItemsContainer.items = [...copy, item];
+    activeItemsContainer.items = [...copy, itemDataCopy];
   } else if (level === "first") {
-    let item = itemData;
+    let itemDataCopy = itemData;
     let copy = [...activeItemsContainer.items].map(activeItem => {
       if (activeItem.label === itemData.parent) {
         return {
@@ -124,18 +142,18 @@ const handleToggleItem = itemData => {
       }
       return activeItem;
     });
-    console.log("height with open first", copy);
-    console.log("first with open");
 
+    //to retain submenu's height of root and the activated item upon opening
     if (
       copy.some(activeItem => activeItem.level === "root") &&
       copy.some(activeItem => activeItem.level === "second") &&
-      copy.some(activeItem => activeItem.parent === item.label)
+      copy.some(activeItem => activeItem.parent === itemDataCopy.label)
     ) {
-      //expand root's submenu height
       const secondActiveItemHeight = copy.find(
         activeItem => activeItem.level === "second"
       ).submenuHeight;
+
+      //expand root's submenu height
       copy = copy.map(activeItem => {
         if (activeItem.level === "root") {
           return {
@@ -145,33 +163,44 @@ const handleToggleItem = itemData => {
         }
         return activeItem;
       });
+
       //expand first's submenu height
-      item = {
-        ...item,
+      itemDataCopy = {
+        ...itemDataCopy,
         submenuHeight: itemData.itemsLength * 40 + secondActiveItemHeight,
       };
     }
 
-    activeItemsContainer.items = [...copy, item];
+    activeItemsContainer.items = [...copy, itemDataCopy];
   } else if (level === "second") {
-    const copy = [...activeItemsContainer.items].map(activeItem => {
-      //parent only
+    let copy = [...activeItemsContainer.items].map(activeItem => {
+      //expand this item's parent submenu height
       if (activeItem.label === itemData.parent) {
         return {
           ...activeItem,
           submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
         };
       }
+      return activeItem;
+    });
 
+    const parentHeight = copy.find(
+      activeItem => activeItem.label === itemData.parent
+    ).submenuHeight;
+
+    //expand this item's root submenu height
+    copy = copy.map(activeItem => {
       if (activeItem.level === "root") {
         return {
           ...activeItem,
-          submenuHeight: activeItem.submenuHeight + itemData.submenuHeight,
+          submenuHeight:
+            activeItem.itemsLength * 40 + parentHeight + itemData.submenuHeight,
         };
       }
 
       return activeItem;
     });
+
     activeItemsContainer.items = [...copy, itemData];
   }
 };
@@ -185,6 +214,8 @@ defineExpose({
 
 <template>
   <BaseSidebar
+    @handleMouseLeave="handleMouseLeave"
+    @handleMouseEnter="handleMouseEnter"
     :isSidebarOpen="isSidebarOpen"
     :isSidebarHovering="isSidebarHovering"
     :isOffCanvasOpen="isOffCanvasOpen"
@@ -227,10 +258,11 @@ defineExpose({
             :itemsLength="item.items.length"
             :label="item.label"
             :type="item.type"
-            :href="item.url"
+            :path="item.path"
+            :href="menuSection.path + item.path"
             :isCollapsible="item.isCollapsible"
             :isLink="item.isLink"
-            :parentTag="'main'"
+            :parentTag="menuSection.headerLabel"
             :activeItems="activeItemsContainer.items"
           >
             <!-- FIRST LEVEL SUBMENU ITEMS -->
@@ -244,7 +276,8 @@ defineExpose({
               :itemsLength="firstItem.items.length"
               :label="firstItem.label"
               :type="firstItem.type"
-              :href="firstItem.url"
+              :path="firstItem.path"
+              :href="menuSection.path + item.path + firstItem.path"
               :isCollapsible="firstItem.isCollapsible"
               :bulletType="firstItem.bulletType"
               :parentTag="item.label"
@@ -263,7 +296,13 @@ defineExpose({
                 :itemsLength="secondItem.items.length"
                 :label="secondItem.label"
                 :type="secondItem.type"
-                :href="secondItem.url"
+                :path="secondItem.path"
+                :href="
+                  menuSection.path +
+                  item.path +
+                  firstItem.path +
+                  secondItem.path
+                "
                 :isCollapsible="secondItem.isCollapsible"
                 :bulletType="secondItem.bulletType"
                 :parentTag="firstItem.label"
@@ -282,7 +321,14 @@ defineExpose({
                   :itemsLength="thirdItem.items.length"
                   :label="thirdItem.label"
                   :type="thirdItem.type"
-                  :href="thirdItem.url"
+                  :path="thirdItem.url"
+                  :href="
+                    menuSection.path +
+                    item.path +
+                    firstItem.path +
+                    secondItem.path +
+                    thirdItem.path
+                  "
                   :isCollapsible="thirdItem.isCollapsible"
                   :bulletType="thirdItem.bulletType"
                   :parentTag="secondItem.label"
