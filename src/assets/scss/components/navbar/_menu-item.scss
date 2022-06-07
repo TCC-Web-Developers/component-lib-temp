@@ -72,6 +72,11 @@ span {
 // Submenu
 .menu-item {
   position: relative;
+
+  .menu-submenu-item {
+    max-height: max-content;
+  }
+
   .menu-link {
     display: block;
     width: 100%;

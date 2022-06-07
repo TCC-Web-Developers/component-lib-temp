@@ -8,6 +8,7 @@ $submenu-dropright: var(--submenu-dropright-animation);
 .menu-submenu {
   display: none;
   background-color: $submenu-bg-color;
+  max-height: 326px;
   width: 275px;
   margin: 0 auto;
   position: absolute;
@@ -36,6 +37,7 @@ $submenu-dropright: var(--submenu-dropright-animation);
 
   .subitem-subnav {
     display: hidden;
+    max-height: 326px;
     top: 0%;
     margin-left: 2px;
     opacity: 0;
