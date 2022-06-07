@@ -99,62 +99,60 @@ const handleToggleItem = itemData => {
   //Append clicked item in active items container based on their dropdown level
   if (level === "root") {
     let itemDataCopy = itemData;
-    const copy = [...activeItemsContainer.items];
+    const activeItemsContainerCopy = [...activeItemsContainer.items];
 
-    //to retain submenu's height of root upon opening
+    //to retain previous submenu's height of root upon opening
     if (activeItemsContainer.items.length) {
-      copy.forEach(firstItem => {
-        if (
-          firstItem.level === "first" &&
-          firstItem.parent === itemData.label
-        ) {
-          copy.forEach(secondItem => {
-            if (
-              secondItem.level === "first" &&
-              secondItem.parent === firstItem.label
-            ) {
-              itemDataCopy = {
-                ...itemData,
-                submenuHeight:
-                  itemData.itemsLength * 40 +
-                  firstItem.submenuHeight +
-                  secondItem.submenuHeight,
-              };
-            }
-          });
-          itemDataCopy = {
-            ...itemData,
-            submenuHeight: itemData.itemsLength * 40 + firstItem.submenuHeight,
-          };
+      const childAndFirstLevelItem = activeItemsContainerCopy.find(
+        activeItem => {
+          return (
+            activeItem.level === "first" && activeItem.parent === itemData.label
+          );
         }
-      });
-    }
+      );
 
-    activeItemsContainer.items = [...copy, itemDataCopy];
-  } else if (level === "first") {
-    let itemDataCopy = itemData;
-    let copy = [...activeItemsContainer.items].map(activeItem => {
-      if (activeItem.label === itemData.parent) {
-        return {
-          ...activeItem,
-          submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
+      if (childAndFirstLevelItem) {
+        itemDataCopy = {
+          ...itemData,
+          submenuHeight:
+            itemData.itemsLength * 40 + childAndFirstLevelItem.submenuHeight,
         };
       }
-      return activeItem;
-    });
+    }
+
+    activeItemsContainer.items = [...activeItemsContainerCopy, itemDataCopy];
+  } else if (level === "first") {
+    let itemDataCopy = itemData;
+    let activeItemsContainerCopy = [...activeItemsContainer.items].map(
+      activeItem => {
+        if (activeItem.label === itemData.parent) {
+          return {
+            ...activeItem,
+            submenuHeight: activeItem.itemsLength * 40 + itemData.submenuHeight,
+          };
+        }
+        return activeItem;
+      }
+    );
 
     //to retain submenu's height of root and the activated item upon opening
     if (
-      copy.some(activeItem => activeItem.level === "root") &&
-      copy.some(activeItem => activeItem.level === "second") &&
-      copy.some(activeItem => activeItem.parent === itemDataCopy.label)
+      activeItemsContainerCopy.some(
+        activeItem => activeItem.level === "root"
+      ) &&
+      activeItemsContainerCopy.some(
+        activeItem => activeItem.level === "second"
+      ) &&
+      activeItemsContainerCopy.some(
+        activeItem => activeItem.parent === itemDataCopy.label
+      )
     ) {
-      const secondActiveItemHeight = copy.find(
+      const secondActiveItemHeight = activeItemsContainerCopy.find(
         activeItem => activeItem.level === "second"
       ).submenuHeight;
 
       //expand root's submenu height
-      copy = copy.map(activeItem => {
+      activeItemsContainerCopy = activeItemsContainerCopy.map(activeItem => {
         if (activeItem.level === "root") {
           return {
             ...activeItem,
@@ -171,9 +169,9 @@ const handleToggleItem = itemData => {
       };
     }
 
-    activeItemsContainer.items = [...copy, itemDataCopy];
+    activeItemsContainer.items = [...activeItemsContainerCopy, itemDataCopy];
   } else if (level === "second") {
-    let copy = [...activeItemsContainer.items].map(activeItem => {
+    let activeItemsContainerCopy = [...activeItemsContainer.items].map(activeItem => {
       //expand this item's parent submenu height
       if (activeItem.label === itemData.parent) {
         return {
@@ -184,12 +182,12 @@ const handleToggleItem = itemData => {
       return activeItem;
     });
 
-    const parentHeight = copy.find(
+    const parentHeight = activeItemsContainerCopy.find(
       activeItem => activeItem.label === itemData.parent
     ).submenuHeight;
 
     //expand this item's root submenu height
-    copy = copy.map(activeItem => {
+    activeItemsContainerCopy = activeItemsContainerCopy.map(activeItem => {
       if (activeItem.level === "root") {
         return {
           ...activeItem,
@@ -201,7 +199,7 @@ const handleToggleItem = itemData => {
       return activeItem;
     });
 
-    activeItemsContainer.items = [...copy, itemData];
+    activeItemsContainer.items = [...activeItemsContainerCopy, itemData];
   }
 };
 
@@ -262,7 +260,7 @@ defineExpose({
             :href="menuSection.path + item.path"
             :isCollapsible="item.isCollapsible"
             :isLink="item.isLink"
-            :parentTag="menuSection.headerLabel"
+            :parentItem="menuSection.headerLabel"
             :activeItems="activeItemsContainer.items"
           >
             <!-- FIRST LEVEL SUBMENU ITEMS -->
@@ -280,7 +278,7 @@ defineExpose({
               :href="menuSection.path + item.path + firstItem.path"
               :isCollapsible="firstItem.isCollapsible"
               :bulletType="firstItem.bulletType"
-              :parentTag="item.label"
+              :parentItem="item.label"
               :isLink="firstItem.isLink"
               :itemLevel="'first'"
               :activeItems="activeItemsContainer.items"
@@ -305,7 +303,7 @@ defineExpose({
                 "
                 :isCollapsible="secondItem.isCollapsible"
                 :bulletType="secondItem.bulletType"
-                :parentTag="firstItem.label"
+                :parentItem="firstItem.label"
                 :isLink="secondItem.isLink"
                 :itemLevel="'second'"
                 :activeItems="activeItemsContainer.items"
@@ -331,7 +329,7 @@ defineExpose({
                   "
                   :isCollapsible="thirdItem.isCollapsible"
                   :bulletType="thirdItem.bulletType"
-                  :parentTag="secondItem.label"
+                  :parentItem="secondItem.label"
                   :isLink="thirdItem.isLink"
                   :itemLevel="'third'"
                   :activeItems="activeItemsContainer.items"

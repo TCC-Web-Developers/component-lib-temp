@@ -26,7 +26,7 @@ const props = defineProps({
           </ul>
         </div>
       </div>
-      <div class="topbar">
+      <div class="topbar d-flex">
         <slot name="navbar-topbar"></slot>
       </div>
     </div>

@@ -3,6 +3,8 @@ import { ref, computed } from "vue";
 import BaseNavbar from "@/components/navbar/base-navbar.vue";
 import MainmenuItem from "@/components/molecules/navbar/mainmenu-item.vue";
 import MainmenuItemSubmenu from "@/components/molecules/navbar/mainmenu-item-submenu.vue";
+// import BaseTopbarItemBtn from "@/components/navbar/topbar/base-topbar-item-btn.vue";
+import IconChatSix from "@/components/icons/navbar/icon-chat-6.vue";
 //data
 import navbar_data from "@/data/navbar.js";
 import pages_data from "@/data/pages.js";
@@ -76,7 +78,74 @@ const items = computed(() => {
       </MainmenuItem>
     </template>
     <template #navbar-topbar>
-      <button @click="click">TEST</button>
+      <div class="dropdown-item">
+        <div class="topbar-item d-flex align-items-center">
+          <div
+            class="
+              topbar-item-btn
+              btn-item
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span>
+              <IconChatSix />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <div class="topbar-item d-flex align-items-center">
+          <div
+            class="
+              topbar-item-btn
+              btn-item
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span>
+              <IconChatSix />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <div class="topbar-item d-flex align-items-center">
+          <div
+            class="
+              topbar-item-btn
+              btn-item
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span>
+              <IconChatSix />
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown-item">
+        <div class="topbar-item d-flex align-items-center">
+          <div
+            class="
+              topbar-item-btn
+              btn-item
+              d-flex
+              align-items-center
+              justify-content-center
+            "
+          >
+            <span>
+              <IconChatSix />
+            </span>
+          </div>
+        </div>
+      </div>
     </template>
   </BaseNavbar>
 </template>
@@ -85,6 +154,8 @@ const items = computed(() => {
 @import "@/assets/scss/components/navbar/submenu.scss";
 @import "@/assets/scss/navbar.scss";
 @import "@/assets/scss/custom.scss";
+
+@import "@/assets/scss/components/navbar/topbar.scss";
 </style>
 
 <!-- <button
