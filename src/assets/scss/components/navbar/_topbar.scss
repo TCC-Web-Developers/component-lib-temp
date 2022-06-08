@@ -10,6 +10,7 @@ $icon-color: var(--primary-color);
     height: 100%;
     margin-right: 0.25rem;
     .topbar-item {
+      position: relative;
       height: 100%;
       .topbar-item-btn {
         background-color: transparent;

@@ -10,7 +10,7 @@ const emits = defineEmits(["handleMouseEnter", "handleMouseLeave"]);
 
 <template>
   <div
-    class="sidebar-mobile d-flex flex-column flex-row-auto"
+    class="sidebar d-flex flex-column flex-row-auto"
     :class="[
       `sidebar-${
         isSidebarOpen ? 'open' : isSidebarHovering ? 'hover' : 'close'
@@ -30,7 +30,7 @@ const emits = defineEmits(["handleMouseEnter", "handleMouseLeave"]);
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/sidebar.scss";
-.sidebar-mobile {
+.sidebar {
   @media (max-width: 992px) {
     z-index: 501;
     position: fixed;

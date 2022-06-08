@@ -1,10 +1,13 @@
 <script setup>
 import BaseSvgIcon from "@/components/global/base-svg-icon.vue";
+const props = defineProps({
+  icon: String,
+});
 </script>
 
 <template>
   <BaseSvgIcon class="d-flex align-items-center menu-item-icon">
-    <slot></slot>
+    <component :is="icon"></component>
   </BaseSvgIcon>
 </template>
 

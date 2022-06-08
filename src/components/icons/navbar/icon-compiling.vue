@@ -24,4 +24,5 @@
 
 <style lang="scss" scoped>
 @import "@/assets/scss/components/navbar/menu-item.scss";
+@import "@/assets/scss/components/navbar/topbar.scss";
 </style>

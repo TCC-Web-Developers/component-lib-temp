@@ -9,16 +9,10 @@ const props = defineProps({
 </script>
 
 <template>
-  <RouterLink
-    :to="href === 'javascript:;' ? router.currentRoute.value.fullPath : href"
-    class="base-link"
-  >
+  <a v-if="href === 'javascript:;'" :href="href" class="base-link">
+    <slot></slot>
+  </a>
+  <RouterLink v-else :to="href" class="base-link">
     <slot></slot>
   </RouterLink>
-  <!-- <RouterLink
-    :to="href === 'javascript:;' ? router.currentRoute.value.fullPath : href"
-    class="base-link"
-  >
-    <slot></slot>
-  </RouterLink> -->
 </template>
