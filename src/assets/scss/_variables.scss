@@ -57,6 +57,7 @@ $lg: 992px;
 :root {
   //colors
   --primary-color: #{$primary};
+  --primary-color-light: #{rgba($primary, 0.3)};
   --accent-color: #{$accent};
   --light-color: #{$light};
   --dark-color: #{$dark};

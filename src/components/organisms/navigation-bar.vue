@@ -16,6 +16,7 @@ import IconSearch from "@/components/icons/navbar/icon-search.vue";
 import IconEqualizer from "@/components/icons/navbar/icon-equalizer.vue";
 import IconFourBlocks from "@/components/icons/navbar/icon-four-blocks.vue";
 import IconCompiling from "@/components/icons/navbar/icon-compiling.vue";
+import Avatar from "@/assets/avatar.jpg";
 
 const icons = shallowRef([
   {
@@ -143,7 +144,7 @@ const getIcon = iconName => {
                   >24</span
                 >
               </div>
-              <ul class="topbar-dropdown-tab d-flex align-items-stretch">
+              <ul class="topbar-dropdown-tab d-flex align-items-stretch mt-2">
                 <li class="dropdown-tab-item">
                   <a href="#">Reminders</a>
                 </li>
@@ -154,6 +155,56 @@ const getIcon = iconName => {
                   <a href="#">Logs</a>
                 </li>
               </ul>
+            </div>
+
+            <div class="topbar-dropdown-body">
+              <div class="topbar-dropdown-scroll">
+                <div class="reminders d-flex align-items-center mb-3">
+                  <div class="reminders-avatar flex-shrink-0">
+                    <img alt="Vue logo" :src="Avatar" />
+                  </div>
+                  <div class="reminders-content d-flex">
+                    <div class="reminders-name-jobtitle d-flex flex-column">
+                      <a href="#" class="reminders-name">Marcus Smart</a>
+                      <span class="reminders-jobtitle text-muted"
+                        >UI/UX, Art Director</span
+                      >
+                    </div>
+                    <div class="reminders-item d-flex align-items-center py-2">
+                      <span class="reminders-percent">+65%</span>
+                      <a
+                        href="#"
+                        class="reminders-goto btn btn-icon btn-light btn-sm"
+                        >></a
+                      >
+                    </div>
+                  </div>
+                </div>
+                <div class="reminders d-flex align-items-center mb-3">
+                  <div class="reminders-avatar flex-shrink-0">
+                    <img alt="Vue logo" :src="Avatar" />
+                  </div>
+                  <div class="reminders-content d-flex">
+                    <div class="reminders-name-jobtitle d-flex flex-column">
+                      <a href="#" class="reminders-name">Marcus Smart</a>
+                      <span class="reminders-jobtitle text-muted"
+                        >UI/UX, Art Director</span
+                      >
+                    </div>
+                    <div class="reminders-item d-flex align-items-center py-2">
+                      <span class="reminders-percent">+65%</span>
+                      <a
+                        href="#"
+                        class="reminders-goto btn btn-icon btn-light btn-sm"
+                        >></a
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="reminders-see-all d-flex justify-content-center pt-4">
+                <a href="#" class="fw-semibold">See All</a>
+              </div>
             </div>
           </div>
         </div>
@@ -171,15 +222,18 @@ const getIcon = iconName => {
 .topbar-item-dropdown-menu {
   position: absolute;
   width: 350px;
-  background-color: red;
   transform: translate3d(-295px, 72px, 0px);
   top: 0px;
   left: 0px;
   will-change: transform;
+  -webkit-box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
+  box-shadow: 0px 15px 50px 0px rgb(82 63 105 / 15%);
 
   .topbar-dropdown-header {
     padding-top: 2.8rem;
     width: 100%;
+    background-color: #3658d2;
+    border-radius: 0.4rem 0.4rem 0 0;
 
     .message-center {
       .message-center-label {
@@ -192,7 +246,7 @@ const getIcon = iconName => {
         background-color: #5ccec9;
         color: white;
         width: 2.4rem;
-        height: 2.2rem;
+        height: 2rem;
         font-size: 0.925rem;
         line-height: 1.35;
         border-radius: 0.42rem;
@@ -204,9 +258,98 @@ const getIcon = iconName => {
       gap: 26px;
 
       .dropdown-tab-item {
-        padding: 12px 0;
         font-size: 14px;
         font-weight: 500;
+
+        a {
+          display: block;
+          padding: 12px 0;
+          border-bottom: 2.5px solid $primary;
+        }
+      }
+    }
+  }
+
+  .topbar-dropdown-body {
+    background-color: #ffffff;
+    padding: 26px;
+    border-radius: 0 0 0.4rem 0.4rem;
+
+    .topbar-dropdown-scroll {
+      height: 300px;
+      width: 100%;
+      overflow: auto;
+
+      .reminders {
+        width: 100%;
+        .reminders-avatar {
+          margin-right: 0.6rem;
+          img {
+            border-radius: 0.42rem;
+            height: 35px;
+            width: 35px;
+          }
+        }
+
+        .reminders-content {
+          flex: 1 auto;
+          font-family: var(--font-family);
+          font-weight: 500;
+          .reminders-name-jobtitle {
+            flex-grow: 1;
+            padding-right: 1.2rem;
+            .reminders-name {
+              font-size: 14px;
+              text-decoration: none;
+              color: #181c32 !important;
+              margin-bottom: 0.2rem;
+
+              &:hover {
+                color: var(--primary-color) !important;
+              }
+            }
+
+            .reminders-jobtitle {
+              font-size: 13px;
+              color: #b5b5c3 !important;
+            }
+          }
+
+          .reminders-item {
+            .reminders-percent {
+              font-size: 12px;
+              color: #1bc5bd !important;
+              padding-right: 1.4rem;
+            }
+
+            .reminders-goto {
+              display: block;
+              height: 32.5px;
+              width: 32.5px;
+              text-decoration: none;
+              background-color: #f3f6f9;
+              border-color: #f3f6f9;
+            }
+          }
+        }
+      }
+    }
+
+    .reminders-see-all {
+      a {
+        font-family: var(--font-family);
+        text-decoration: none;
+        border-radius: 0.4rem;
+        padding: 8.4px 13px;
+        font-weight: 500;
+        font-size: 13px;
+        color: var(--primary-color);
+        background-color: var(--primary-color-light);
+
+        &:hover {
+          background-color: var(--primary-color);
+          color: var(--light-color);
+        }
       }
     }
   }
