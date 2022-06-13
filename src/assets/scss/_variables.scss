@@ -81,9 +81,9 @@ $lg: 992px;
   --text-normal: #{$text-normal};
   --text-md: #{$text-md};
   --text-lg: #{$text-lg};
-  --font-light: #{font-light};
-  --font-normal: #{font-normal};
-  --font-medium: #{font-medium};
+  --font-light: #{$font-light};
+  --font-normal: #{$font-normal};
+  --font-medium: #{$font-medium};
   --font-family: #{$font-family};
   //misc
   --transition: #{$transition};

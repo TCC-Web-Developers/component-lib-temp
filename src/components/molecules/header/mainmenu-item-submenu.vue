@@ -1,6 +1,6 @@
 <script setup>
-import SubmenuItem from "@/components/molecules/navbar/submenu-item.vue";
-import BaseSubmenu from "@/components/navbar/base-submenu.vue";
+import SubmenuItem from "./submenu-item.vue";
+import BaseSubmenu from "@/components/header/base-submenu.vue";
 const props = defineProps({
   navbarItem: { type: Object },
   items: { type: Array },

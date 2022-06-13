@@ -1,11 +1,11 @@
 <script setup>
 import { ref, shallowRef } from "vue";
-import BaseSubmenu from "@/components/navbar/base-submenu.vue";
-import BaseSubmenuItem from "@/components/navbar/base-submenu-item.vue";
-import BaseSubmenuItemIcon from "@/components/navbar/base-submenu-item-icon.vue";
-import BaseSubmenuItemLabel from "@/components/navbar/base-submenu-item-label.vue";
-import BaseSubmenuItemArrow from "@/components/navbar/base-submenu-item-arrow.vue";
-import BaseBulletIcon from "@/components/navbar/base-bullet-icon.vue";
+import BaseSubmenu from "@/components/header/base-submenu.vue";
+import BaseSubmenuItem from "@/components/header/base-submenu-item.vue";
+import BaseSubmenuItemIcon from "@/components/header/base-submenu-item-icon.vue";
+import BaseSubmenuItemLabel from "@/components/header/base-submenu-item-label.vue";
+import BaseSubmenuItemArrow from "@/components/header/base-submenu-item-arrow.vue";
+import BaseBulletIcon from "@/components/header/base-bullet-icon.vue";
 //ICONS
 import IconDefault from "@/components/icons/navbar/icon-briefcase.vue";
 import IconBriefcase from "@/components/icons/navbar/icon-briefcase.vue";

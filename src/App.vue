@@ -2,8 +2,8 @@
 import { ref, computed } from "vue";
 import { RouterView } from "vue-router";
 // import IconPlaceholder from "@/components/IconPlaceholder.vue";
-import SidebarNavigation from "@/components/organisms/sidebar-navigation.vue";
-import NavigationBar from "@/components/organisms/navigation-bar.vue";
+import Sidebar from "@/components/organisms/the-sidebar.vue";
+import Header from "@/components/organisms/the-header.vue";
 import MainContent from "@/components/organisms/main-content.vue";
 import BaseWrapper from "@/components/base-wrapper.vue";
 
@@ -31,20 +31,27 @@ const isSidebarOpen = computed(() => {
         v-show="isOffCanvasOpen"
         class="overlay"
       ></div>
-      <SidebarNavigation ref="sidebar" :isOffCanvasOpen="isOffCanvasOpen" />
+      <!-- begin::SIDEBAR -->
+      <Sidebar ref="sidebar" :isOffCanvasOpen="isOffCanvasOpen" />
+      <!-- end::SIDEBAR -->
       <BaseWrapper :isSidebarOpen="isSidebarOpen">
-        <template #navigation-bar>
-          <NavigationBar
+        <!-- begin::HEADER -->
+        <template #header>
+          <Header
             @handleToggleOffCanvas="handleToggleOffCanvas"
             @handleToggleSidebar="handleToggleSidebar"
             :isSidebarOpen="isSidebarOpen"
           />
         </template>
+        <!-- end::HEADER -->
+
+        <!-- begin::MAIN CONTENT -->
         <template #main-content>
           <MainContent>
             <RouterView />
           </MainContent>
         </template>
+        <!-- end::MAIN CONTENT -->
       </BaseWrapper>
     </div>
   </main>

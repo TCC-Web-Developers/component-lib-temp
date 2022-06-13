@@ -1,6 +1,6 @@
 <script setup>
-import BaseMainMenuItem from "@/components/navbar/base-mainmenu-item.vue";
-import BaseLabel from "@/components/navbar/base-label.vue";
+import BaseMainMenuItem from "@/components/header/base-mainmenu-item.vue";
+import BaseLabel from "@/components/header/base-label.vue";
 
 const props = defineProps({
   label: { type: String, default: "label" },

@@ -1,5 +1,5 @@
 <script setup>
-import BaseLabel from "@/components/navbar/base-label.vue";
+import BaseLabel from "./base-label.vue";
 // import BaseLabel from "./base-label.vue";
 </script>
 

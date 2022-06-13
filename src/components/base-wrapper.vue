@@ -9,7 +9,7 @@ const props = defineProps({
     class="wrapper"
     :class="[`wrapper-sidebar-${isSidebarOpen ? 'open' : 'close'}`]"
   >
-    <slot name="navigation-bar"></slot>
+    <slot name="header"></slot>
     <slot name="main-content"></slot>
   </div>
 </template>
